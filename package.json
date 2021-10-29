@@ -1,0 +1,9 @@
+{
+    "name": "bazel-module-federation",
+    "workspaces": {
+        "packages": []
+    },
+    "dependencies": {},
+    "devDependencies": {
+    }
+}
