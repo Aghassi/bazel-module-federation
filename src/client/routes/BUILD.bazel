@@ -1,47 +1,13 @@
-load("@npm//webpack:index.bzl", "webpack")
+load("//bazel/js:roads.bzl", "build_road")
 
-# TODO: could be abstracted like this?
-# 
-# load("//bazel/js:roads.bzl", "build_road")
-# 
-# build_road(
-#     name = "main",
-#     entry = "./index.jsx",
-#     data = ["index.jsx"]
-# )
-
-webpack(
-    name = "main_road",
-    chdir = package_name(),
-    args = [
-        "--env name=main_road",
-        "--env entry=./index.jsx",
-        "--output-path=$(RULEDIR)",
-        "--config=./webpack.road.config.js"
-    ],
-    data = [
-        "@npm//:node_modules",
-        "//:package.json",
-        "webpack.road.config.js",
-        "index.jsx"
-    ],
-    output_dir = True
+build_road(
+    name = "main",
+    entry = "index.jsx",
+    chdir = package_name()
 )
 
-webpack(
-    name = "secondary_road",
-    chdir = package_name(),
-    args = [
-        "--env name=main_road",
-        "--env entry=./secondary.jsx",
-        "--output-path=$(RULEDIR)",
-        "--config=./webpack.road.config.js"
-    ],
-    data = [
-        "@npm//:node_modules",
-        "//:package.json",
-        "webpack.road.config.js",
-        "secondary.jsx"
-    ],
-    output_dir = True
+build_road(
+    name = "secondary",
+    entry = "secondary.jsx",
+    chdir = package_name()
 )
