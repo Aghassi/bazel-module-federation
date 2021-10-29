@@ -2,9 +2,15 @@ load("@npm//webpack:index.bzl", "webpack")
 
 webpack(
     name = "build",
+    chdir = package_name(),
+    args = [
+        "--output-path=$(RULEDIR)"
+    ],
     data = [
         "@npm//:node_modules",
         "host.jsx",
-        "webpack.config.js"
+        "webpack.config.js",
+        "//:package.json"
     ],
+    output_dir = True
 )
