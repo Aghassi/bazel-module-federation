@@ -1,5 +1,5 @@
 workspace(
-    name = "bazel_module_fedeartion",
+    name = "bazel_module_federation",
     managed_directories = {"@npm": ["node_modules"]},
 )
 
