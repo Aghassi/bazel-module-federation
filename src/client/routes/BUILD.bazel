@@ -3,7 +3,5 @@ load("//bazel/js:roads.bzl", "build_road")
 build_road(
     name = "main",
     entry = "./$(execpath index.jsx)",
-    data = [
-        "index.jsx"
-    ]
+    data = glob(["*.jsx", "*.js"])
 )
