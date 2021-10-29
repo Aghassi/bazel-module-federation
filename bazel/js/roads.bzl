@@ -11,7 +11,7 @@ def build_road(name, entry, chdir):
             "--env name=" + build_name,
             "--env entry=./" + entry,
             "--output-path=$(RULEDIR)",
-            "--config=../../../bazel/js/webpack.road.config.js"
+            "--config=$(locations //bazel/js:webpack.road.config.js)"
         ],
         data = [
             "@npm//:node_modules",

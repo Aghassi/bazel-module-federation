@@ -1,7 +1,7 @@
 load("//bazel/js:roads.bzl", "build_road")
 
 build_road(
-    name = "main",
-    entry = "index.jsx",
+    name = "secondary",
+    entry = "secondary.jsx",
     chdir = package_name()
 )
