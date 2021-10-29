@@ -5,6 +5,6 @@
     },
     "dependencies": {},
     "devDependencies": {
-        "@bazel/bazelisk": "^1.10.1"
+        "@bazel/bazelisk": "1.10.1"
     }
 }
