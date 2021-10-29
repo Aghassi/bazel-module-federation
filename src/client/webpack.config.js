@@ -1,8 +1,10 @@
 const ModuleFederationPlugin =
   require("webpack").container.ModuleFederationPlugin;
 const deps = require("../../package.json").dependencies;
+const path = require("path");
+
 module.exports = {
-  entry: "./host.jsx",
+  entry: path.resolve(__dirname, "./host.jsx"),
   cache: false,
 
   mode: "development",

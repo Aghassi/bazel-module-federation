@@ -4,7 +4,8 @@ webpack(
     name = "build",
     chdir = package_name(),
     args = [
-        "--output-path=$(RULEDIR)"
+        "--output-path=$(RULEDIR)",
+        "--config=./webpack.config.js"
     ],
     data = [
         "@npm//:node_modules",
