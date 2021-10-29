@@ -1,6 +1,6 @@
 const ModuleFederationPlugin =
   require("webpack").container.ModuleFederationPlugin;
-const deps = require("../../../package.json").dependencies;
+const deps = require("../../package.json").dependencies;
 
 /**
  * Webpack configuration used to generate a unique road
