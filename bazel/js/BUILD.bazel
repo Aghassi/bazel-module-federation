@@ -1,4 +1,5 @@
 # Defines this as an importable module area for shared macros and configs
 exports_files([
-    "webpack.road.config.js"
+    "webpack.road.config.js",
+    "webpack.host.config.js"
 ])

@@ -1,4 +1,4 @@
-load("//bazel/js:roads.bzl", "build_road")
+load("//bazel/js:defaults.bzl", "build_road")
 
 build_road(
     name = "main",
