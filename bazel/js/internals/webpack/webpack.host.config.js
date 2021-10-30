@@ -10,7 +10,6 @@ const path = require("path");
  * @returns {import('webpack').Configuration} a Webpack configuration
  */
 module.exports = ({ entry, production }) => {
-  console.log(outputPath);
   return {
     entry: entry,
     cache: false,

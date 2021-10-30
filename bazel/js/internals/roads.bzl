@@ -13,7 +13,7 @@ def build_road(name, entry, data):
     """
     build_name = name + "_road"
     webpack(
-        name = build_name,
+        name = "routes"  if name == "default" else name,
         args = [
             "--env name=" + build_name,
             "--env entry=" + entry,
