@@ -2,28 +2,26 @@ load("@npm//webpack:index.bzl", "webpack")
 
 # Defines this as an importable module area for shared macros and configs
 
-def build_road(name, entry, data):
+def build_host(entry, data):
     """
-    Macro that allows easy composition of routes from a multi route spa
+    Macro that allows easy building of the main host of a SPA
 
     Args:
-        name: name of a road (route)
         entry: the entry file to the route
         data: any dependencies the route needs to build
     """
-    build_name = name + "_road"
     webpack(
-        name = build_name,
+        name = "build_host",
         args = [
-            "--env name=" + build_name,
+            "--env name=host",
             "--env entry=" + entry,
             "--output-path=$(RULEDIR)",
-            "--config=$(rootpath //bazel/js/internals/webpack:road_config)"
+            "--config=$(rootpath //bazel/js/internals/webpack:host_config)"
         ],
         data = [
             "@npm//:node_modules",
             "//:package.json",
-            "//bazel/js/internals/webpack:road_config",
+            "//bazel/js/internals/webpack:host_config",
         ] + data,
         output_dir = True
     )

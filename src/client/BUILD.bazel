@@ -1,17 +1,8 @@
-load("@npm//webpack:index.bzl", "webpack")
+load("//bazel/js:defaults.bzl", "build_host", "pkg_web")
 
-webpack(
-    name = "build_host",
-    args = [
-        "--env entry=./$(execpath host.jsx)",
-        "--output-path=$(RULEDIR)",
-        "--config=bazel/js/webpack.host.config.js"
-    ],
+build_host(
+    entry = "./$(execpath host.jsx)",
     data = [
-        "@npm//:node_modules",
         "host.jsx",
-        "//bazel/js:webpack.host.config.js",
-        "//:package.json"
-    ],
-    output_dir = True
+    ]
 )

@@ -1,0 +1,16 @@
+# Defines this as an importable module area for shared macros and configs
+filegroup(
+    name = "host_config",
+    srcs = [
+        "webpack.host.config.js"
+    ],
+    visibility = ["//visibility:public"]
+)
+
+filegroup(
+    name = "road_config",
+    srcs = [
+        "webpack.road.config.js"
+    ],
+    visibility = ["//visibility:public"]
+)
