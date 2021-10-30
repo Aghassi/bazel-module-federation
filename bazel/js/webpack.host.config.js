@@ -3,61 +3,69 @@ const ModuleFederationPlugin =
 const deps = require("../../package.json").dependencies;
 const path = require("path");
 
-module.exports = {
-  entry: path.resolve(__dirname, "./host.jsx"),
-  cache: false,
+/**
+ * Webpack configuration used to generate a unique road
+ *
+ * @param {Record<string, boolean|string}
+ * @returns {import('webpack').Configuration} a Webpack configuration
+ */
+module.exports = ({ entry, production, name }) => {
+  return {
+    entry: entry,
+    cache: false,
 
-  mode: "development",
-  devtool: "source-map",
+    mode: production ? "production" : "development",
+    devtool: "source-map",
 
-  optimization: {
-    minimize: false,
-  },
+    optimization: {
+      minimize: false,
+    },
 
-  output: {
-    publicPath: "auto",
-  },
+    output: {
+      publicPath: "auto",
+    },
 
-  resolve: {
-    extensions: [".jsx", ".js"],
-  },
+    resolve: {
+      extensions: [".jsx", ".js"],
+    },
 
-  module: {
-    rules: [
-      {
-        test: /\.jsx?$/,
-        loader: require.resolve("esbuild-loader"),
-        exclude: /node_modules/,
-        options: {
-          loader: "jsx", // Remove this if you're not using JSX
-          target: "es2015", // Syntax to compile to (see options below for possible values)
+    module: {
+      rules: [
+        {
+          test: /\.jsx?$/,
+          loader: require.resolve("esbuild-loader"),
+          exclude: /node_modules/,
+          options: {
+            loader: "jsx", // Remove this if you're not using JSX
+            target: "es2015", // Syntax to compile to (see options below for possible values)
+          },
         },
-      },
+      ],
+    },
+
+    plugins: [
+      new ModuleFederationPlugin({
+        name: "app",
+        filename: "appEntry.js",
+        remotes: {
+          // app_02: "app_02@http://localhost:3002/remoteEntry.js",
+          // app_03: "app_03@http://localhost:3003/remoteEntry.js",
+          // app_04: "app_04@http://localhost:3004/remoteEntry.js",
+          // app_05: "app_05@http://localhost:3005/remoteEntry.js",
+        },
+        shared: {
+          ...deps,
+          "react-router-dom": {
+            singleton: true,
+          },
+          "react-dom": {
+            singleton: true,
+          },
+          react: {
+            singleton: true,
+          },
+        },
+      }),
     ],
-  },
-
-  plugins: [
-    new ModuleFederationPlugin({
-      name: "app",
-      filename: "appEntry.js",
-      remotes: {
-        // app_02: "app_02@http://localhost:3002/remoteEntry.js",
-        // app_03: "app_03@http://localhost:3003/remoteEntry.js",
-        // app_04: "app_04@http://localhost:3004/remoteEntry.js",
-        // app_05: "app_05@http://localhost:3005/remoteEntry.js",
-      },
-      shared: {
-        ...deps,
-        "react-router-dom": {
-          singleton: true,
-        },
-        "react-dom": {
-          singleton: true,
-        },
-        react: {
-          singleton: true,
-        },
-      },
-    }),
-  ],
+  };
 };
