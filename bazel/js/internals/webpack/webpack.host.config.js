@@ -9,7 +9,8 @@ const path = require("path");
  * @param {Record<string, boolean|string}
  * @returns {import('webpack').Configuration} a Webpack configuration
  */
-module.exports = ({ entry, production, name }) => {
+module.exports = ({ entry, production }) => {
+  console.log(outputPath);
   return {
     entry: entry,
     cache: false,

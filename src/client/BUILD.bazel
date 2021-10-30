@@ -1,4 +1,4 @@
-load("//bazel/js:defaults.bzl", "build_host", "pkg_web")
+load("//bazel/js:defaults.bzl", "build_host")
 
 build_host(
     entry = "./$(execpath host.jsx)",

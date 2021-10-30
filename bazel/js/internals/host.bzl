@@ -15,7 +15,7 @@ def build_host(entry, data):
         args = [
             "--env name=host",
             "--env entry=" + entry,
-            "--output-path=$(RULEDIR)",
+            "--output-path=$(@D)",
             "--config=$(rootpath //bazel/js/internals/webpack:host_config)"
         ],
         data = [

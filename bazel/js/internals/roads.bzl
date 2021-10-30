@@ -17,7 +17,7 @@ def build_road(name, entry, data):
         args = [
             "--env name=" + build_name,
             "--env entry=" + entry,
-            "--output-path=$(RULEDIR)",
+            "--output-path=$(@D)",
             "--config=$(rootpath //bazel/js/internals/webpack:road_config)"
         ],
         data = [
