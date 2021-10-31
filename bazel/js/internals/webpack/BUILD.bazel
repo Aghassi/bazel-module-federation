@@ -8,6 +8,15 @@ filegroup(
 )
 
 filegroup(
+    name = "webpack_shared_configs",
+    srcs = [
+        "webpack.common.config.js",
+        "webpack.module-federation.shared.js"
+    ],
+    visibility = ["//visibility:public"]
+)
+
+filegroup(
     name = "road_config",
     srcs = [
         "webpack.road.config.js"

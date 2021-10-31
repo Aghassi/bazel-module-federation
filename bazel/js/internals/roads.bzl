@@ -24,6 +24,7 @@ def build_road(name, entry, data):
             "@npm//:node_modules",
             "//:package.json",
             "//bazel/js/internals/webpack:road_config",
+            "//bazel/js/internals/webpack:webpack_shared_configs",
         ] + data,
         output_dir = True
     )

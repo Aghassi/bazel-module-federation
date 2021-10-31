@@ -1,7 +1,7 @@
 const ModuleFederationPlugin =
   require("webpack").container.ModuleFederationPlugin;
-const deps = require("../../../../package.json").dependencies;
-const path = require("path");
+const webpackCommonConfig = require("./webpack.common.config");
+const shared = require("./webpack.module-federation.shared");
 
 /**
  * Webpack configuration used to generate a unique road
@@ -11,38 +11,8 @@ const path = require("path");
  */
 module.exports = ({ entry, production }) => {
   return {
-    entry: entry,
-    cache: false,
-
-    mode: production ? "production" : "development",
-    devtool: "source-map",
-
-    optimization: {
-      minimize: false,
-    },
-
-    output: {
-      publicPath: "auto",
-    },
-
-    resolve: {
-      extensions: [".jsx", ".js"],
-    },
-
-    module: {
-      rules: [
-        {
-          test: /\.jsx?$/,
-          loader: require.resolve("esbuild-loader"),
-          exclude: /node_modules/,
-          options: {
-            loader: "jsx", // Remove this if you're not using JSX
-            target: "es2015", // Syntax to compile to (see options below for possible values)
-          },
-        },
-      ],
-    },
-
+    entry,
+    ...webpackCommonConfig({ production }),
     plugins: [
       new ModuleFederationPlugin({
         name: "app",
@@ -53,18 +23,7 @@ module.exports = ({ entry, production }) => {
           // app_04: "app_04@http://localhost:3004/remoteEntry.js",
           // app_05: "app_05@http://localhost:3005/remoteEntry.js",
         },
-        shared: {
-          ...deps,
-          "react-router-dom": {
-            singleton: true,
-          },
-          "react-dom": {
-            singleton: true,
-          },
-          react: {
-            singleton: true,
-          },
-        },
+        shared,
       }),
     ],
   };
