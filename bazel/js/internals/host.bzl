@@ -11,7 +11,7 @@ def build_host(entry, data):
         data: any dependencies the route needs to build
     """
     webpack(
-        name = "host",
+        name = "host_build",
         args = [
             "--env name=host",
             "--env entry=" + entry,

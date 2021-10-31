@@ -1,0 +1,11 @@
+load("//bazel/js:defaults.bzl", "pkg_web")
+
+
+pkg_web(
+    name = "client",
+    srcs = [
+        "//src/client/host",
+        "//src/client/routes"
+    ],
+    additional_root_paths = ["%s/routes" % package_name(), "%s/host" % package_name()]
+)

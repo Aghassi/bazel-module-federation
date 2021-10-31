@@ -13,7 +13,7 @@ def build_road(name, entry, data):
     """
     build_name = name + "_road"
     webpack(
-        name = "routes"  if name == "default" else name,
+        name = name,
         args = [
             "--env name=" + build_name,
             "--env entry=" + entry,
@@ -26,5 +26,6 @@ def build_road(name, entry, data):
             "//bazel/js/internals/webpack:road_config",
             "//bazel/js/internals/webpack:webpack_shared_configs",
         ] + data,
-        output_dir = True
+        output_dir = True,
+        visibility = ["//src/client/routes:__pkg__"]
     )
