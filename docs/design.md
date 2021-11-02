@@ -54,8 +54,8 @@ We design a manifest object for the cartographer that defines the location of th
 
 ```json
 {
-    “/”: “index.[sha].js”
-    “/login”: “login-index.[sha].js”
+    "/": "index.[sha].js",
+    "/login": "login-index.[sha].js"
 }
 ```
 
@@ -65,15 +65,15 @@ Should we anticipate multiple builds of the project, then we should define for e
 
 ```json
 {
-    “/”: {
-        "en-us-es6": “index.a.[sha].js”,
-        "en-us-node": “index.b.[sha].js”,
-        "default": “index.c.[sha].js”,
+    "/": {
+        "en-us-es6": "index.a.[sha].js",
+        "en-us-node": "index.b.[sha].js",
+        "default": "index.c.[sha].js"
     },
-    “/login”: {
-        "en-us-es6": “login-index.a.[sha].js”,
-        "en-us-node": “login-index.b.[sha].js”,
-        "default": “login-index.c.[sha].js”
+    "/login": {
+        "en-us-es6": "login-index.a.[sha].js",
+        "en-us-node": "login-index.b.[sha].js",
+        "default": "login-index.c.[sha].js"
     },
 }
 ```
