@@ -1,4 +1,4 @@
-load("//bazel/js:defaults.bzl", "build_road", "pkg_web")
+load("//bazel/js:defaults.bzl", "build_road", "pkg_web", "generate_route_manifest")
 
 build_road(
     name = "default",
@@ -14,4 +14,9 @@ pkg_web(
     ],
     additional_root_paths = ["%s/secondary" % package_name()],
     visibility = ["//src/client:__pkg__"]
+)
+
+generate_route_manifest(
+    name = "route_manifest",
+    data = ["routes"]
 )
