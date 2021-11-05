@@ -1,0 +1,6 @@
+load("//bazel/docker:defaults.bzl", "container_image")
+
+container_image(
+    name = "server",
+    base = "@node//image"
+)
