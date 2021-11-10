@@ -25,15 +25,8 @@ yarn_install(
     yarn_lock = "//:yarn.lock",
 )
 
-# Install Rules Docker for building containers
-http_archive(
-    name = "io_bazel_rules_docker",
-    sha256 = "92779d3445e7bdc79b961030b996cb0c91820ade7ffa7edca69273f404b085d5",
-    strip_prefix = "rules_docker-0.20.0",
-    urls = ["https://github.com/bazelbuild/rules_docker/releases/download/v0.20.0/rules_docker-v0.20.0.tar.gz"],
-)
+# Skylib
 
-load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 http_archive(
     name = "bazel_skylib",
     urls = [
@@ -42,5 +35,37 @@ http_archive(
     ],
     sha256 = "c6966ec828da198c5d9adbaa94c05e3a1c7f21bd012a0b29ba8ddbccb2c93b0d",
 )
+
 load("@bazel_skylib//:workspace.bzl", "bazel_skylib_workspace")
 bazel_skylib_workspace()
+
+# Install Rules Docker for building containers
+http_archive(
+    name = "io_bazel_rules_docker",
+    sha256 = "92779d3445e7bdc79b961030b996cb0c91820ade7ffa7edca69273f404b085d5",
+    strip_prefix = "rules_docker-0.20.0",
+    urls = ["https://github.com/bazelbuild/rules_docker/releases/download/v0.20.0/rules_docker-v0.20.0.tar.gz"],
+)
+
+load(
+    "@io_bazel_rules_docker//repositories:repositories.bzl",
+    _container_repositories = "repositories",
+)
+
+_container_repositories()
+
+load("@io_bazel_rules_docker//repositories:deps.bzl", _container_deps = "deps")
+
+_container_deps()
+
+# Pull containers
+
+load("@io_bazel_rules_docker//container:container.bzl", "container_pull")
+
+container_pull(
+    name = "node",
+    registry = "registry.hub.docker.com",
+    repository = "library/node",
+    tag = "16.13.0-bullseye",
+    digest = "sha256:861ae5fa5b05b54090ed780bc1bafac0846c55a7001180dffebbc18ae790b3cf"
+)
