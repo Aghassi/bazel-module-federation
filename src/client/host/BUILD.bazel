@@ -4,6 +4,9 @@ build_host(
     entry = "./$(execpath host.jsx)",
     data = [
         "host.jsx",
+        "bootstrap.jsx",
+        "DynamicComponent.jsx",
+        "Route.jsx",
     ]
 )
 
