@@ -1,7 +1,0 @@
-load("//bazel/js:defaults.bzl", "build_road")
-
-build_road(
-    name = "default",
-    entry = "./$(execpath default.jsx)",
-    data = ["default.jsx"]
-)
