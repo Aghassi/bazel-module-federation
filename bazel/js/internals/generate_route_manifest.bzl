@@ -22,7 +22,6 @@ def generate_route_manifest(name, data):
         name = "route_manifest",
         tool = ":bin",
         data = data,
-        # TODO: hash this so it's more hermetic via --stamp
-        outs = ["route.manifest.json"],
+        stdout = "route.manifest.json",
         visibility = ["//visibility:public"]
     )

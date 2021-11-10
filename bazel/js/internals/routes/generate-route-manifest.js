@@ -39,11 +39,4 @@ routeDirs.forEach((dir) => {
 });
 
 // Finally write out the manifest
-fs.writeFileSync(
-  // TODO: determine a better way to find bazel-out
-  `${path.resolve(
-    process.cwd(),
-    "bazel-out/k8-fastbuild/bin/src/client/routes"
-  )}/route.manifest.json`,
-  JSON.stringify(manifest, null, 2)
-);
+process.stdout.write(JSON.stringify(manifest, null, 2));
