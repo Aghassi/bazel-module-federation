@@ -12,6 +12,7 @@ module.exports = ({ production }) => {
     output: {
       filename: production ? "[name].[contenthash].js" : "[name].js",
       publicPath: "auto",
+      // crossOriginLoading: "anonymous",
     },
 
     resolve: {
