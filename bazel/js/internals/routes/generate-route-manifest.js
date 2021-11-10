@@ -17,15 +17,17 @@ const getFilesInDirectory = (source) =>
     .filter((dirent) => dirent.isFile())
     .map((dirent) => dirent.name);
 
-const routeDirs = getDirectories(
-  "bazel-out/k8-fastbuild/bin/src/client/routes/routes"
-);
+const platform = process.platform === "darwin" ? process.platform : 'k8'
+const outputRoutesBase = `bazel-out/${platform}-fastbuild/bin/src/client/routes/routes`
+
+
+const routeDirs = getDirectories(outputRoutesBase);
 
 // For each folder we read, check what it is and
 // determine the route mapping
 routeDirs.forEach((dir) => {
   const remoteEntry = getFilesInDirectory(
-    `bazel-out/k8-fastbuild/bin/src/client/routes/routes/${dir}`
+    `${outputRoutesBase}/${dir}`
   ).filter((file) => !file.endsWith(".map") && file.startsWith("remote"));
 
   switch (dir) {
