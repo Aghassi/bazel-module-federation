@@ -6,7 +6,7 @@ export default function Route({ path }) {
   return (
     <DynamicComponent
       system={{
-        url: `http://localhost:3000/routes/${identifier}/${window.routeManifest[path]}`,
+        url: `http://localhost:3000/${identifier}/${window.routeManifest[path]}`,
         scope: `${identifier}_road`,
         module: "./route",
       }}

@@ -7,5 +7,5 @@ pkg_web(
         "//src/client/host",
         "//src/client/routes"
     ],
-    additional_root_paths = ["%s/routes" % package_name(), "%s/host" % package_name()]
+    additional_root_paths = ["%s/routes/routes/" % package_name(), "%s/host/host" % package_name()]
 )

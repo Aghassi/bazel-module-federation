@@ -14,12 +14,10 @@ const requestListener = function (req, res) {
   res.writeHead(200);
   res.end(getPageTemplate({
     head: [
-      `<script src="http://localhost:3000/host/main.js"></script>`
+      `<script src="http://localhost:3000/app.main.js"></script>`
     ]
   }));
 };
 
-const server = http.createServer({
-  cors: 
-}, requestListener);
+const server = http.createServer(requestListener);
 server.listen(8080);
