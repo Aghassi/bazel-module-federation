@@ -1,4 +1,5 @@
 import React from "react";
+import preload from "./capabilities/preload";
 
 function loadComponent(scope, module) {
   return async () => {
@@ -80,7 +81,7 @@ export default function DynamicComponent(props) {
 
   return (
     <React.Suspense fallback="Loading System">
-      <Component />
+      <Component preload={preload} />
     </React.Suspense>
   );
 }
