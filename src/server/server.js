@@ -14,7 +14,7 @@ const requestListener = function (req, res) {
   res.writeHead(200);
   res.end(getPageTemplate({
     head: [
-      `<script src="http://localhost:3000/app.main.js"></script>`
+      `<script src="${process.env.CDN_HOST}/app.main.js"></script>`
     ]
   }));
 };
