@@ -6,16 +6,26 @@ const config = JSON.parse(fs.readFileSync("./route.manifest.json").toString());
 
 config.CDN_HOST = process.env.CDN_HOST;
 
-module.exports = ({ head = [""] }) => `<!DOCTYPE html>
+const getIdentifier = (path) =>
+  path === "/" || typeof path === "undefined" ? "default" : path;
+
+const getRemoteEntryScript = (path) => {
+  const identifier = getIdentifier(path);
+  const manifestIndex = path.substring(1) || '/';
+
+  return `<script src="${process.env.CDN_HOST}/${identifier}/${config[manifestIndex]}"></script>`
+}
+
+module.exports = ({ head = [""], path = "/" }) => {
+    const identifier = getIdentifier(path)
+    return `<!DOCTYPE html>
 <html lang="en">
   <head>
     ${head.join("\n")}
+    ${getRemoteEntryScript(path)}
   </head>
-  <script>
-    window.routeManifest = ${JSON.stringify(config)}
-  </script>
   <body>
     <div id="root"></div>
   </body>
 </html>
-`;
+`};

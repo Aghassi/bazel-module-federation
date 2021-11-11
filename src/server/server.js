@@ -10,9 +10,9 @@ const http = require("http");
  * @param {import('http').ServerResponse} res response
  */
 const requestListener = function (req, res) {
-  console.log(req.url);
   res.writeHead(200);
   res.end(getPageTemplate({
+    path: req.url,
     head: [
       `<script src="${process.env.CDN_HOST}/app.main.js"></script>`
     ]

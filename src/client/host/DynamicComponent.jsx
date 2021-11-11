@@ -59,20 +59,22 @@ const useDynamicScript = (args) => {
 };
 
 export default function DynamicComponent(props) {
-  const { ready, failed } = useDynamicScript({
-    url: props.system && props.system.url,
-  });
-
-  if (!props.system) {
-    return <h2>Not system specified</h2>;
-  }
-
-  if (!ready) {
-    return <h2>Loading dynamic script: {props.system.url}</h2>;
-  }
-
-  if (failed) {
-    return <h2>Failed to load dynamic script: {props.system.url}</h2>;
+  if(!window[props.system.scope]) {
+    const { ready, failed } = useDynamicScript({
+      url: props.system && props.system.url,
+    });
+  
+    if (!props.system) {
+      return <h2>Not system specified</h2>;
+    }
+  
+    if (!ready) {
+      return <h2>Loading dynamic script: {props.system.url}</h2>;
+    }
+  
+    if (failed) {
+      return <h2>Failed to load dynamic script: {props.system.url}</h2>;
+    }
   }
 
   const Component = React.lazy(
