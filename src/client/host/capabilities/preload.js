@@ -5,9 +5,10 @@ export default ({ path }) => {
     const identifier = getIdentifier(path)
     const remoteEntry = `${routeManifest.CDN_HOST}/${identifier}/${routeManifest[identifier]}`
 
-    const script = document.createElement('script');
+    const script = document.createElement('link');
 
-    script.src = remoteEntry;
+    script.href = remoteEntry;
+    script.rel = 'preload';
 
     document.head.appendChild(script);
 }
