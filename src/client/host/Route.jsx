@@ -7,7 +7,6 @@ export default function Route({ path }) {
   return (
     <DynamicComponent
       system={{
-        url: `${window.routeManifest.CDN_HOST}/${identifier}/${window.routeManifest[path]}`,
         scope: `${identifier}_road`,
         module: "./route",
       }}
