@@ -2,9 +2,9 @@ load("//bazel/js:defaults.bzl", "build_road")
 
 build_road(
     name = "secondary",
-    entry = "./$(execpath secondary.jsx)",
     data = [
         "dep.jsx",
-        "secondary.jsx"
-    ]
+        "secondary.jsx",
+    ],
+    entry = "./$(execpath secondary.jsx)",
 )

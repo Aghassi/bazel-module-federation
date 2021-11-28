@@ -2,24 +2,24 @@
 filegroup(
     name = "host_config",
     srcs = [
-        "webpack.host.config.js"
+        "webpack.host.config.js",
     ],
-    visibility = ["//visibility:public"]
+    visibility = ["//visibility:public"],
 )
 
 filegroup(
     name = "webpack_shared_configs",
     srcs = [
         "webpack.common.config.js",
-        "webpack.module-federation.shared.js"
+        "webpack.module-federation.shared.js",
     ],
-    visibility = ["//visibility:public"]
+    visibility = ["//visibility:public"],
 )
 
 filegroup(
     name = "road_config",
     srcs = [
-        "webpack.road.config.js"
+        "webpack.road.config.js",
     ],
-    visibility = ["//visibility:public"]
+    visibility = ["//visibility:public"],
 )

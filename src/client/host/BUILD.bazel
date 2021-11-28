@@ -1,22 +1,22 @@
 load("//bazel/js:defaults.bzl", "build_host", "pkg_web")
 
 build_host(
-    entry = "./$(execpath host.jsx)",
     data = [
-        "host.jsx",
-        "bootstrap.jsx",
         "DynamicComponent.jsx",
         "Route.jsx",
+        "bootstrap.jsx",
         "capabilities/getIdentifier.js",
         "capabilities/preload.js",
-    ]
+        "host.jsx",
+    ],
+    entry = "./$(execpath host.jsx)",
 )
 
 pkg_web(
     name = "host",
     srcs = [
-        ":host_build"
+        ":host_build",
     ],
     additional_root_paths = ["%s/host_build" % package_name()],
-    visibility = ["//src/client:__pkg__"]
+    visibility = ["//src/client:__pkg__"],
 )

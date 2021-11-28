@@ -1,4 +1,4 @@
-load("@build_bazel_rules_nodejs//:index.bzl", "npm_package_bin", "nodejs_binary")
+load("@build_bazel_rules_nodejs//:index.bzl", "nodejs_binary", "npm_package_bin")
 
 def generate_route_manifest(name, data):
     """
@@ -23,5 +23,5 @@ def generate_route_manifest(name, data):
         tool = ":bin",
         data = data,
         stdout = "route.manifest.json",
-        visibility = ["//visibility:public"]
+        visibility = ["//visibility:public"],
     )

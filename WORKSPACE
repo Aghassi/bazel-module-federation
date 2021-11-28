@@ -13,14 +13,14 @@ http_archive(
     urls = ["https://github.com/bazelbuild/rules_nodejs/releases/download/4.4.6/rules_nodejs-4.4.6.tar.gz"],
 )
 
-load("@build_bazel_rules_nodejs//:index.bzl", "yarn_install", "node_repositories")
+load("@build_bazel_rules_nodejs//:index.bzl", "node_repositories", "yarn_install")
 
 # NOTE: this rule installs nodejs, npm, and yarn, but does NOT install
 # your npm dependencies into your node_modules folder.
 # You must still run the package manager to do this.
 node_repositories(
+    node_version = NODE_VERSION,
     package_json = ["//:package.json"],
-     node_version = NODE_VERSION,
 )
 
 yarn_install(
@@ -34,14 +34,15 @@ yarn_install(
 
 http_archive(
     name = "bazel_skylib",
+    sha256 = "c6966ec828da198c5d9adbaa94c05e3a1c7f21bd012a0b29ba8ddbccb2c93b0d",
     urls = [
         "https://github.com/bazelbuild/bazel-skylib/releases/download/1.1.1/bazel-skylib-1.1.1.tar.gz",
         "https://mirror.bazel.build/github.com/bazelbuild/bazel-skylib/releases/download/1.1.1/bazel-skylib-1.1.1.tar.gz",
     ],
-    sha256 = "c6966ec828da198c5d9adbaa94c05e3a1c7f21bd012a0b29ba8ddbccb2c93b0d",
 )
 
 load("@bazel_skylib//:workspace.bzl", "bazel_skylib_workspace")
+
 bazel_skylib_workspace()
 
 # Rules Go is needed by Rules Docker
@@ -73,7 +74,6 @@ load("@bazel_gazelle//:deps.bzl", "gazelle_dependencies")
 
 gazelle_dependencies()
 
-
 # Install Rules Docker for building containers
 http_archive(
     name = "io_bazel_rules_docker",
@@ -99,8 +99,31 @@ load("@io_bazel_rules_docker//container:container.bzl", "container_pull")
 
 container_pull(
     name = "node",
+    digest = "sha256:861ae5fa5b05b54090ed780bc1bafac0846c55a7001180dffebbc18ae790b3cf",
     registry = "registry.hub.docker.com",
     repository = "library/node",
     tag = "%s-bullseye" % NODE_VERSION,
-    digest = "sha256:861ae5fa5b05b54090ed780bc1bafac0846c55a7001180dffebbc18ae790b3cf"
+)
+
+# Buildifier for linting
+http_archive(
+    name = "com_google_protobuf",
+    sha256 = "9b4ee22c250fe31b16f1a24d61467e40780a3fbb9b91c3b65be2a376ed913a1a",
+    strip_prefix = "protobuf-3.13.0",
+    urls = [
+        "https://github.com/protocolbuffers/protobuf/archive/v3.13.0.tar.gz",
+    ],
+)
+
+load("@com_google_protobuf//:protobuf_deps.bzl", "protobuf_deps")
+
+protobuf_deps()
+
+http_archive(
+    name = "com_github_bazelbuild_buildtools",
+    sha256 = "ae34c344514e08c23e90da0e2d6cb700fcd28e80c02e23e4d5715dddcb42f7b3",
+    strip_prefix = "buildtools-4.2.2",
+    urls = [
+        "https://github.com/bazelbuild/buildtools/archive/refs/tags/4.2.2.tar.gz",
+    ],
 )

@@ -1,3 +1,9 @@
+load("@com_github_bazelbuild_buildtools//buildifier:def.bzl", "buildifier")
+
 exports_files([
-    "package.json"
+    "package.json",
 ])
+
+buildifier(
+    name = "buildifier",
+)

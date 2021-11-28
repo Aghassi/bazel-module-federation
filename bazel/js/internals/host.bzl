@@ -16,7 +16,7 @@ def build_host(entry, data):
             "--env name=host",
             "--env entry=" + entry,
             "--output-path=$(@D)",
-            "--config=$(rootpath //bazel/js/internals/webpack:host_config)"
+            "--config=$(rootpath //bazel/js/internals/webpack:host_config)",
         ],
         data = [
             "@npm//:node_modules",
@@ -24,5 +24,5 @@ def build_host(entry, data):
             "//bazel/js/internals/webpack:host_config",
             "//bazel/js/internals/webpack:webpack_shared_configs",
         ] + data,
-        output_dir = True
+        output_dir = True,
     )

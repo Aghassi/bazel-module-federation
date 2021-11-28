@@ -6,8 +6,8 @@ container_layer(
     name = "route_manifest_layer",
     directory = "/home/node",
     files = [
-        "//src/client/routes:route_manifest"
-    ]
+        "//src/client/routes:route_manifest",
+    ],
 )
 
 # This layer container the server files
@@ -15,15 +15,18 @@ container_layer(
     name = "server_source_layer",
     directory = "/home/node",
     files = [
+        ":getPageTemplate.js",
         ":server.js",
-        ":getPageTemplate.js"
-    ]
+    ],
 )
 
 # This builds the final image for use and sets the directory to /home/node
 container_image(
     name = "server",
     base = "@node//image",
+    layers = [
+        ":server_source_layer",
+        ":route_manifest_layer",
+    ],
     workdir = "/home/node",
-    layers = [":server_source_layer", ":route_manifest_layer"]
 )

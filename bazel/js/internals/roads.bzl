@@ -18,7 +18,7 @@ def build_road(name, entry, data):
             "--env name=" + build_name,
             "--env entry=" + entry,
             "--output-path=$(@D)",
-            "--config=$(rootpath //bazel/js/internals/webpack:road_config)"
+            "--config=$(rootpath //bazel/js/internals/webpack:road_config)",
         ],
         data = [
             "@npm//:node_modules",
@@ -27,5 +27,5 @@ def build_road(name, entry, data):
             "//bazel/js/internals/webpack:webpack_shared_configs",
         ] + data,
         output_dir = True,
-        visibility = ["//src/client/routes:__pkg__"]
+        visibility = ["//src/client/routes:__pkg__"],
     )
