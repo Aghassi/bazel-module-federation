@@ -3,6 +3,8 @@ workspace(
     managed_directories = {"@npm": ["node_modules"]},
 )
 
+NODE_VERSION = "16.13.0"
+
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
 http_archive(
@@ -18,7 +20,7 @@ load("@build_bazel_rules_nodejs//:index.bzl", "yarn_install", "node_repositories
 # You must still run the package manager to do this.
 node_repositories(
     package_json = ["//:package.json"],
-     node_version = "16.10.0",
+     node_version = NODE_VERSION,
 )
 
 yarn_install(
@@ -69,6 +71,6 @@ container_pull(
     name = "node",
     registry = "registry.hub.docker.com",
     repository = "library/node",
-    tag = "16.13.0-bullseye",
+    tag = "%s-bullseye" % NODE_VERSION,
     digest = "sha256:861ae5fa5b05b54090ed780bc1bafac0846c55a7001180dffebbc18ae790b3cf"
 )
