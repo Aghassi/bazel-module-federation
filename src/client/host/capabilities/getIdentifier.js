@@ -1,1 +1,2 @@
-export default (path) => (path === "/" || typeof path === "undefined" ? "default" : path);
+export default (path) =>
+  path === "/" || typeof path === "undefined" ? "default" : path;

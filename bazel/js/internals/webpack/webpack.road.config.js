@@ -11,14 +11,16 @@ const shared = require("./webpack.module-federation.shared");
  * @returns {import('webpack').Configuration} a Webpack configuration
  */
 module.exports = ({ entry, production, name }) => {
-  const commonConfig = generateWebpackCommonConfig({ production })
+  const commonConfig = generateWebpackCommonConfig({ production });
 
   return {
     entry,
     ...commonConfig,
     output: {
       ...commonConfig.output,
-      filename: production ? `${name}.[name].[contenthash].js` : `${name}.[name].js`,
+      filename: production
+        ? `${name}.[name].[contenthash].js`
+        : `${name}.[name].js`,
     },
     plugins: [
       new ModuleFederationPlugin({

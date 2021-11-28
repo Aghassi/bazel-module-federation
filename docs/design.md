@@ -2,7 +2,7 @@
 title: Silent Cartographer (WIP)
 authors: David Aghassi, Jonathan Lee, Lucas Shadler
 date: 10/27/2021
-demo: https://github.com/Aghassi/bazel-module-federation 
+demo: https://github.com/Aghassi/bazel-module-federation
 ---
 
 # Bazel Federated SPA
@@ -25,16 +25,11 @@ Given a monorepo with a web application, the application can be split into four 
   - As a safety, roads cannot depend on other roads as that would cause complexity in the DAG. Shared code is best split out into first part dependencies
   - To iterate on the prior point, shared components can go into a design system which is shared amongst the roads for simplicity.
   - Roads are built with Webpack but using ESBuild-loader instead of babel and ESBuild for optimization instead of terser
-  - Context for each road should be a mapping based on the folder structure of the initial source files. This will allow us to design clients, services, and CDNs that can reliably fetch road contexts and interact with the road artifacts.
-    - Example: a routes folder contains two things
-      - folders with the name of routes
-      - an index file at the root of the folder that defines the `/` route
-    - Each folder and root index file maps to an object, further discussed in the `API Design` section
-    - The manifest is hydrated by the server and exposed to the host (cartographer) to know what to load when each route is navigated to
-server - A lightweight nodejs container that is responsible for constructing the HTML markup to be sent to a user when they request the website. The server has access to:
-The CDN url
-a file that maps all paths to their roads with the hash embedded in the file name (this file will be prefixed by the CDN for lookup)
-the known location and hash of the cartographer
+  - Context for each road should be a mapping based on the folder structure of the initial source files. This will allow us to design clients, services, and CDNs that can reliably fetch road contexts and interact with the road artifacts. - Example: a routes folder contains two things - folders with the name of routes - an index file at the root of the folder that defines the `/` route - Each folder and root index file maps to an object, further discussed in the `API Design` section - The manifest is hydrated by the server and exposed to the host (cartographer) to know what to load when each route is navigated to
+    server - A lightweight nodejs container that is responsible for constructing the HTML markup to be sent to a user when they request the website. The server has access to:
+    The CDN url
+    a file that maps all paths to their roads with the hash embedded in the file name (this file will be prefixed by the CDN for lookup)
+    the known location and hash of the cartographer
 
 Since we would leverage Module Federation, it alleviates the problem of single version upgrades. Roads can upgrade ahead of the rest of the app if there is a circumstance where they want to run ahead. In general, the app can move in lockstep as well as purposefully leave roads behind if they are blocking an upgrade of the rest of the app. This allows flexibility at scale, and can be enforced and tracked by other tools to drive version alignment. The performance hit of not upgrading is usually good enough to encourage folks to upgrade and follow paradigms.
 
@@ -54,8 +49,8 @@ We design a manifest object for the cartographer that defines the location of th
 
 ```json
 {
-    "/": "index.[sha].js",
-    "/login": "login-index.[sha].js"
+  "/": "index.[sha].js",
+  "/login": "login-index.[sha].js"
 }
 ```
 
@@ -65,16 +60,16 @@ Should we anticipate multiple builds of the project, then we should define for e
 
 ```json
 {
-    "/": {
-        "en-us-es6": "index.a.[sha].js",
-        "en-us-node": "index.b.[sha].js",
-        "default": "index.c.[sha].js"
-    },
-    "/login": {
-        "en-us-es6": "login-index.a.[sha].js",
-        "en-us-node": "login-index.b.[sha].js",
-        "default": "login-index.c.[sha].js"
-    },
+  "/": {
+    "en-us-es6": "index.a.[sha].js",
+    "en-us-node": "index.b.[sha].js",
+    "default": "index.c.[sha].js"
+  },
+  "/login": {
+    "en-us-es6": "login-index.a.[sha].js",
+    "en-us-node": "login-index.b.[sha].js",
+    "default": "login-index.c.[sha].js"
+  }
 }
 ```
 
@@ -85,7 +80,7 @@ We assume that the application would have the ability to calculate a suitable bu
 After a successful POC, we anticipate we will have the following:
 
 - A way to develop individual routes in isolation without requiring a rebuild of different routes
-- A service and client runtime that can load federated routes 
+- A service and client runtime that can load federated routes
 - A portable docker container that will facilitate the application
 
 In the following sections, we will discuss options and features that will be the next things to target.
@@ -96,13 +91,13 @@ It is relatively common that an application will need to target different langua
 
 Performance on the web, amongst many other factors, is dependent on the amount of content required to be fetched by a clients machine in order to render an application. If we can support multiple builds of a given route that minimize the amount of polyfilled content, and also preemptively localize each bundle with the appropriate language, then our users would see noticeable benefit.
 
-The building of these multiple routes will be facilitated through Bazel, which can call Webpack multiple times for a given route. This defers the build caching to Bazel, which will do a better job only building routes whose dependencies change compared to Webpack multi-builds. The value of this would be very noticeable, as localization tools typically have small  changes to subsets of the languages they support over time, which would thus only change a portion of the builds.
+The building of these multiple routes will be facilitated through Bazel, which can call Webpack multiple times for a given route. This defers the build caching to Bazel, which will do a better job only building routes whose dependencies change compared to Webpack multi-builds. The value of this would be very noticeable, as localization tools typically have small changes to subsets of the languages they support over time, which would thus only change a portion of the builds.
 
 The main hurdle here is in reconciling configurations for multiple builds, given that we want all routes to have a content-hashed entry file for client-side caching. In general, we need:
 
 - A flat config structure that can provide a mapping from route to any arbitrary number of builds, plus a default build
 - The ability for a cartographer to select a given route based on its context (potentially delivered by the server via useragent and request headers, but not required)
-- Developer tooling: ability to select which language to load in a developer context to easily validate different builds 
+- Developer tooling: ability to select which language to load in a developer context to easily validate different builds
 - Developer tooling: integration testing against each build (Bazel should already enforce this with DAG)
 
 ### Eager Routes (and SSR)
