@@ -16,7 +16,10 @@ load("@build_bazel_rules_nodejs//:index.bzl", "yarn_install", "node_repositories
 # NOTE: this rule installs nodejs, npm, and yarn, but does NOT install
 # your npm dependencies into your node_modules folder.
 # You must still run the package manager to do this.
-node_repositories(package_json = ["//:package.json"])
+node_repositories(
+    package_json = ["//:package.json"],
+     node_version = "16.10.0",
+)
 
 yarn_install(
     # Name this npm so that Bazel Label references look like @npm//package
