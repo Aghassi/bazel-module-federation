@@ -8,19 +8,7 @@ const fs = require("fs");
 
 const config = require("@carto/routes");
 
-const getIdentifier = (path) =>
-  path === "/" || typeof path === "undefined" ? "default" : path;
-
-const getRemoteEntryScript = (remoteEntryPath) => {
-  const identifier = getIdentifier(remoteEntryPath);
-  const manifestIndex = remoteEntryPath.substring(1) || "/";
-
-  return `<script src="${process.env.CDN_HOST}${path.join(
-    "/",
-    identifier,
-    config[manifestIndex]
-  )}"></script>`;
-};
+const { getRemoteEntryScript } = require("@carto/utils");
 
 /**
  *
@@ -28,12 +16,17 @@ const getRemoteEntryScript = (remoteEntryPath) => {
  * @param {import('http').ServerResponse} res response
  */
 const requestListener = function (req, res) {
-  console.log(`PATH REQUESTED: ${req.url}`);
+  // Filter out favicon from spurious logic
   if (req.url.startsWith("/favicon.ico")) {
     res.writeHead(404);
   } else if (req.url.startsWith("/__dev__/")) {
+    // Currently, in development mode, we bundle all client
+    //  assets with the server and set CDN_HOST to '/__dev__/'
+    //  as an indicator that the dependencies are co-located.
+    //  In this situtation, we deliver the assets in the same
+    //  file structure but from local
+
     const filePath = req.url.replace("/__dev__/", "");
-    console.log(`ASSET REQUEST URL: ${filePath}`);
 
     const fileToFetch = path.resolve("../..", "src/client/client", filePath);
 
@@ -48,16 +41,15 @@ const requestListener = function (req, res) {
         path: req.url,
         head: [
           `<script src="${process.env.CDN_HOST}/app.main.js"></script>`,
-          getRemoteEntryScript(req.url || "/"),
+          getRemoteEntryScript(req.url || "/", config),
         ],
       })
     );
   }
 };
 
-const server = http.createServer(requestListener);
-server.listen(8080);
-
-if (process.env.CDN_HOST === "/__dev__/") {
+if (process.env.CDN_HOST.includes("__dev__")) {
   console.log("Development server started on port 8080");
 }
+const server = http.createServer(requestListener);
+server.listen(8080);

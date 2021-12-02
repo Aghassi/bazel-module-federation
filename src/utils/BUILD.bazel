@@ -1,0 +1,27 @@
+load("//bazel/js:defaults.bzl", "build_road", "generate_route_manifest", "js_library", "pkg_web")
+load("@npm//@bazel/typescript:index.bzl", "ts_project")
+
+# build the Typescript to JS with ts_project
+ts_project(
+    name = "lib",
+    srcs = [
+        "index.ts",
+    ],
+    tsconfig = {
+        "compilerOptions": {
+            "esModuleInterop": True,
+        },
+    },
+    deps = [
+        "@npm//@types/node",
+    ],
+)
+
+js_library(
+    name = "__pkg__",
+    package_name = "@carto/utils",
+    srcs = [
+        ":lib",
+    ],
+    visibility = ["//visibility:public"],
+)

@@ -9,6 +9,7 @@ js_library(
     ],
     deps = [
         "//src/client/routes:__pkg__",
+        "//src/utils:__pkg__",
     ],
 )
 
@@ -35,6 +36,16 @@ container_layer(
     ],
 )
 
+# This layer links the server container to the routes being
+# Changed so it can have the route manifest
+container_layer(
+    name = "utils_layer",
+    directory = "/home/node/node_modules/@carto/utils",
+    files = [
+        "//src/utils:__pkg__",
+    ],
+)
+
 # This layer container the server files
 container_layer(
     name = "server_source_layer",
@@ -51,6 +62,7 @@ container_image(
     layers = [
         ":server_source_layer",
         ":route_manifest_layer",
+        ":utils_layer",
     ],
     workdir = "/home/node",
 )
