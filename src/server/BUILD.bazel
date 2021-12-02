@@ -1,4 +1,25 @@
 load("//bazel/docker:defaults.bzl", "container_image", "container_layer")
+load("//bazel/js:defaults.bzl", "js_library", "nodejs_binary", "pkg_web")
+
+js_library(
+    name = "server",
+    srcs = [
+        ":getPageTemplate.js",
+        ":server.js",
+    ],
+    deps = [
+        "//src/client/routes:__pkg__",
+    ],
+)
+
+nodejs_binary(
+    name = "dev",
+    chdir = "%s" % package_name(),
+    data = [
+        ":server",
+    ],
+    entry_point = "server.js",
+)
 
 # This layer links the server container to the routes being
 # Changed so it can have the route manifest
@@ -15,14 +36,13 @@ container_layer(
     name = "server_source_layer",
     directory = "/home/node",
     files = [
-        ":getPageTemplate.js",
-        ":server.js",
+        ":server",
     ],
 )
 
 # This builds the final image for use and sets the directory to /home/node
 container_image(
-    name = "server",
+    name = "server_image",
     base = "@node//image",
     layers = [
         ":server_source_layer",
