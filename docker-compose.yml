@@ -1,6 +1,6 @@
 services:
   web:
-    image: "bazel/src/server:server"
+    image: "bazel/src/server:server_image"
     command: "node server.js"
     ports:
       - "8080:8080"
@@ -15,4 +15,3 @@ services:
       - PORT=3000
     ports:
       - "3000:3000"
-

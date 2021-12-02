@@ -25,9 +25,9 @@ nodejs_binary(
 # Changed so it can have the route manifest
 container_layer(
     name = "route_manifest_layer",
-    directory = "/home/node",
+    directory = "/home/node/node_modules/@carto/routes",
     files = [
-        "//src/client/routes:route_manifest",
+        "//src/client/routes:__pkg__",
     ],
 )
 
