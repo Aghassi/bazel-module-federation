@@ -17,8 +17,12 @@ nodejs_binary(
     chdir = "%s" % package_name(),
     data = [
         ":server",
+        "//src/client",
     ],
     entry_point = "server.js",
+    env = {
+        "CDN_HOST": "/__dev__",
+    },
 )
 
 # This layer links the server container to the routes being
