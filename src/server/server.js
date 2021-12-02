@@ -31,7 +31,7 @@ const requestListener = function (req, res) {
     const fileToFetch = path.resolve("../..", "src/client/client", filePath);
 
     res.writeHead(200);
-    res.end(fs.readFileSync(fileToFetch));
+    res.end(fs.readFileSync(fileToFetch, "utf-8"));
   } else {
     res.writeHead(200);
     // In standard processing, this logical path will return an HTML page

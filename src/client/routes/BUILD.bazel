@@ -28,5 +28,5 @@ js_library(
         "index.js",
         ":route_manifest",
     ],
-    visibility = ["//visibility:public"],
+    visibility = ["//:server_group"],
 )

@@ -10,5 +10,7 @@ pkg_web(
         "%s/routes/routes/" % package_name(),
         "%s/host/host" % package_name(),
     ],
-    visibility = ["//visibility:public"],
+    visibility = [
+        "//:server_group",
+    ],
 )

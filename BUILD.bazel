@@ -7,3 +7,13 @@ exports_files([
 buildifier(
     name = "buildifier",
 )
+
+package_group(
+    name = "server_group",
+    packages = [
+        "//src/client",
+        "//src/client/routes",
+        "//src/server",
+        "//src/utils",
+    ],
+)
