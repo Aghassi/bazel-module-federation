@@ -17,6 +17,10 @@ module.exports = ({ production }) => {
 
     resolve: {
       extensions: [".jsx", ".js"],
+      fallback: {
+        // In the browser, let `path` be an empty module
+        path: false,
+      },
     },
 
     module: {

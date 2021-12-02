@@ -2,11 +2,11 @@ import * as path from "path";
 
 /**
  * Get the route identifier, where '/' translates to 
- * @param path Request path
+ * @param reqPath Request path
  * @returns Route identifier
  */
-export const getIdentifier = (path?: string): string =>
-  path === "/" || typeof path === "undefined" ? "default" : path;
+export const getIdentifier = (reqPath?: string): string =>
+  reqPath === "/" || typeof reqPath === "undefined" ? "default" : reqPath;
 
 /**
  * Generates script that loads a routes remote entry

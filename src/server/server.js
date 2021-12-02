@@ -30,12 +30,16 @@ const requestListener = function (req, res) {
 
     const fileToFetch = path.resolve("../..", "src/client/client", filePath);
 
-    console.log(fileToFetch);
-
     res.writeHead(200);
     res.end(fs.readFileSync(fileToFetch));
   } else {
     res.writeHead(200);
+    // In standard processing, this logical path will return an HTML page
+    //  containing the following:
+    //
+    //  - A root div for the React tree to render in (see ./getPageTemplate)
+    //  - A fetch of the main app within head
+    //  - A fetch of the remoteEntry script for the target page within head
     res.end(
       getPageTemplate({
         path: req.url,

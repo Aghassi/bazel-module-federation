@@ -5,9 +5,9 @@ build_host(
         "DynamicComponent.jsx",
         "Route.jsx",
         "bootstrap.jsx",
-        "capabilities/getIdentifier.js",
         "capabilities/preload.js",
         "host.jsx",
+        "//src/utils:__pkg__",
     ],
     entry = "./$(execpath host.jsx)",
 )
