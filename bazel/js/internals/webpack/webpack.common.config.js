@@ -19,18 +19,18 @@ module.exports = ({ production }) => {
       extensions: [".jsx", ".js"],
     },
 
-    module: {
-      rules: [
-        {
-          test: /\.jsx?$/,
-          loader: require.resolve("esbuild-loader"),
-          exclude: /node_modules/,
-          options: {
-            loader: "jsx", // Remove this if you're not using JSX
-            target: "es2015", // Syntax to compile to (see options below for possible values)
-          },
-        },
-      ],
-    },
+    // module: {
+    //   rules: [
+    //     {
+    //       test: /\.jsx?$/,
+    //       loader: require.resolve("esbuild-loader"),
+    //       exclude: /node_modules/,
+    //       options: {
+    //         loader: "jsx", // Remove this if you're not using JSX
+    //         target: "es2015", // Syntax to compile to (see options below for possible values)
+    //       },
+    //     },
+    //   ],
+    // },
   };
 };
