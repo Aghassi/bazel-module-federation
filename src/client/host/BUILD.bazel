@@ -9,7 +9,7 @@ build_host(
         "capabilities/preload.js",
         "host.jsx",
     ],
-    entry = "./$(execpath host.jsx)",
+    entry = "host",
 )
 
 pkg_web(
