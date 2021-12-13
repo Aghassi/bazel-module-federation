@@ -12,6 +12,12 @@ def build_host(entry, data):
         data: any dependencies the route needs to build
     """
 
+    # list of all transpilation targets from SWC to be passed to webpack
+    deps = [
+        ":transpile_" + files.replace("//", "").replace("/", "_").split(".")[0]
+        for files in data
+    ]
+
     [
         swc(
             name = "transpile_" + s.replace("/", "_").split(".")[0],
@@ -35,9 +41,6 @@ def build_host(entry, data):
             "//:package.json",
             "//bazel/js/internals/webpack:host_config",
             "//bazel/js/internals/webpack:webpack_shared_configs",
-        ] + [
-            "//src/client/host:transpile_" + files.replace("/", "_").split(".")[0]
-            for files in data
-        ],
+        ] + deps,
         output_dir = True,
     )

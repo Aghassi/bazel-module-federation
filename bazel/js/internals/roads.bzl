@@ -14,16 +14,11 @@ def build_road(name, entry, data):
     """
     build_name = name + "_road"
 
-    if name == "default":
-        deps = [
-            ":transpile_" + files.replace("//", "").replace("/", "_").split(".")[0]
-            for files in data
-        ]
-    else:
-        deps = [
-            ":transpile_" + files.replace("//", "").replace("/", "_").split(".")[0]
-            for files in data
-        ]
+    # list of all transpilation targets from SWC to be passed to webpack
+    deps = [
+        ":transpile_" + files.replace("//", "").replace("/", "_").split(".")[0]
+        for files in data
+    ]
 
     [
         swc(
