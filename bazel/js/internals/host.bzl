@@ -46,11 +46,20 @@ def build_host(entry, data):
         output_dir = True,
     )
 
+    swc(
+        name = "host_compress",
+        args = [
+            "-C minify=true",
+        ],
+        srcs = [":host_build"],
+        visibility = ["//src/client/routes:__pkg__"],
+    )
+
     pkg_web(
         name = "host",
         srcs = [
-            ":host_build",
+            ":host_compress",
         ],
-        additional_root_paths = ["%s/host_build" % native.package_name()],
+        additional_root_paths = ["%s/host_compress" % native.package_name()],
         visibility = ["//src/client:__pkg__"],
     )

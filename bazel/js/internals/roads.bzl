@@ -46,5 +46,13 @@ def build_road(name, entry, data):
             "//bazel/js/internals/webpack:webpack_shared_configs",
         ] + deps,
         output_dir = True,
+    )
+
+    swc(
+        name = name + "_compress",
+        args = [
+            "-C minify=true",
+        ],
+        srcs = [":" + name + "_build"],
         visibility = ["//src/client/routes:__pkg__"],
     )
