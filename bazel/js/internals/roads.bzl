@@ -52,8 +52,8 @@ def build_road(name, entry, data):
         name = name,
         args = [
             "-C minify=true",
-            "-C jsc.mangle=true",
-            "-C jsc.compress.unused=true",
+            "-C jsc.minify.mangle=true",
+            "-C jsc.minify.compress.unused=true",
         ],
         output_dir = True,
         srcs = [":" + name + "_build"],
