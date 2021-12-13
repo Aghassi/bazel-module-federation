@@ -51,6 +51,7 @@ def build_road(name, entry, data):
     swc(
         name = name + "_compress",
         args = [
+            "-d $(@D)",
             "-C minify=true",
         ],
         srcs = [":" + name + "_build"],
