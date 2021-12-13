@@ -1,5 +1,6 @@
 load("@npm//webpack:index.bzl", "webpack")
 load("@aspect_rules_swc//swc:swc.bzl", "swc")
+load("@build_bazel_rules_nodejs//:index.bzl", "pkg_web")
 
 # Defines this as an importable module area for shared macros and configs
 
@@ -43,4 +44,13 @@ def build_host(entry, data):
             "//bazel/js/internals/webpack:webpack_shared_configs",
         ] + deps,
         output_dir = True,
+    )
+
+    pkg_web(
+        name = "host",
+        srcs = [
+            ":host_build",
+        ],
+        additional_root_paths = ["%s/host_build" % native.package_name()],
+        visibility = ["//src/client:__pkg__"],
     )
