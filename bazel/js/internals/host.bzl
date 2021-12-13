@@ -14,7 +14,7 @@ def build_host(entry, data):
 
     [
         swc(
-            name = "transpile_" + s.replace(".jsx", ""),
+            name = "transpile_" + s.replace("/", "_").split(".")[0],
             args = [
                 "-C jsc.parser.jsx=true",
             ],
@@ -26,7 +26,7 @@ def build_host(entry, data):
         name = "host_build",
         args = [
             "--env name=host",
-            "--env entry=$(location :transpile_host)",
+            "--env entry=./$(location :transpile_host)",
             "--output-path=$(@D)",
             "--config=$(rootpath //bazel/js/internals/webpack:host_config)",
         ],
@@ -36,8 +36,8 @@ def build_host(entry, data):
             "//bazel/js/internals/webpack:host_config",
             "//bazel/js/internals/webpack:webpack_shared_configs",
         ] + [
-            "//src/client/host:transpile_" + out
-            for out in data
+            "//src/client/host:transpile_" + files.replace("/", "_").split(".")[0]
+            for files in data
         ],
         output_dir = True,
     )
