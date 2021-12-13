@@ -1,4 +1,5 @@
 {
+  "minify": false,
   "jsc": {
     "parser": {
       "syntax": "ecmascript",
