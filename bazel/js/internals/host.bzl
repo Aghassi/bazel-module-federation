@@ -51,6 +51,7 @@ def build_host(entry, data):
         args = [
             "-C minify=true",
         ],
+        output_dir = True,
         srcs = [":host_build"],
         visibility = ["//src/client/routes:__pkg__"],
     )

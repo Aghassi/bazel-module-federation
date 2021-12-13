@@ -49,11 +49,11 @@ def build_road(name, entry, data):
     )
 
     swc(
-        name = name + "_compress",
+        name = name,
         args = [
-            "-d $(@D)",
             "-C minify=true",
         ],
+        output_dir = True,
         srcs = [":" + name + "_build"],
         visibility = ["//src/client/routes:__pkg__"],
     )

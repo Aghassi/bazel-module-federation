@@ -32,9 +32,9 @@ yarn_install(
 
 http_archive(
     name = "aspect_rules_swc",
-    sha256 = "67d6020374627f60c6c1e5d5e1690fcdc4fa39952de8a727d3aabe265ca843be",
-    strip_prefix = "rules_swc-0.1.0",
-    url = "https://github.com/aspect-build/rules_swc/archive/v0.1.0.tar.gz",
+    sha256 = "b78a1073e8a5b284a352ce0c9dcc47ba0936e3461e798a8961d5260202587a81",
+    strip_prefix = "rules_swc-2d45d40615aaedcf7cfaa27118a507a5050ad98f",
+    url = "https://github.com/aspect-build/rules_swc/archive/2d45d40.tar.gz",
 )
 
 # Fetches the rules_swc dependencies.
