@@ -14,12 +14,28 @@ def build_road(name, entry, data):
     """
     build_name = name + "_road"
 
-    swc(
-        name = "transpile_" + name,
-        args = [
-            "-C jsc.parser.jsx=true",
-        ],
-    )
+    if name == "default":
+        deps = [
+            ":transpile_" + files.replace("//", "").replace("/", "_").split(".")[0]
+            for files in data
+        ]
+    else:
+        deps = [
+            ":transpile_" + files.replace("//", "").replace("/", "_").split(".")[0]
+            for files in data
+        ]
+
+    [
+        swc(
+            name = "transpile_" + s.replace("//", "").replace("/", "_").split(".")[0],
+            args = [
+                "-C jsc.parser.jsx=true",
+            ],
+            srcs = [s],
+        )
+        for s in data
+    ]
+
     webpack(
         name = name,
         args = [
@@ -29,12 +45,11 @@ def build_road(name, entry, data):
             "--config=$(rootpath //bazel/js/internals/webpack:road_config)",
         ],
         data = [
-            ":transpile_" + name,
             "@npm//:node_modules",
             "//:package.json",
             "//bazel/js/internals/webpack:road_config",
             "//bazel/js/internals/webpack:webpack_shared_configs",
-        ] + data,
+        ] + deps,
         output_dir = True,
         visibility = ["//src/client/routes:__pkg__"],
     )
