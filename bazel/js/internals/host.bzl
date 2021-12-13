@@ -50,6 +50,8 @@ def build_host(entry, data):
         name = "host_compress",
         args = [
             "-C minify=true",
+            "-C jsc.minify.mangle=true",
+            "-C jsc.minify.compress.unused=true",
         ],
         output_dir = True,
         srcs = [":host_build"],
