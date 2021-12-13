@@ -4,6 +4,11 @@
   "workspaces": {
     "packages": []
   },
+  "scripts": {
+    "build": "bazel build //...",
+    "clean": "bazel clean",
+    "prepare": "husky install"
+  },
   "dependencies": {
     "react": "17.0.2",
     "react-dom": "17.0.2"
@@ -13,14 +18,10 @@
     "esbuild-loader": "2.16.0",
     "husky": "7.0.4",
     "lint-staged": "12.1.2",
-    "prettier": "2.5.0",
+    "prettier": "2.5.1",
+    "prettier-plugin-pkg": "0.11.1",
     "prettier-plugin-sh": "0.8.1",
     "webpack": "5.60.0",
     "webpack-cli": "4.9.1"
-  },
-  "scripts": {
-    "build": "bazel build //...",
-    "clean": "bazel clean",
-    "prepare": "husky install"
   }
 }
