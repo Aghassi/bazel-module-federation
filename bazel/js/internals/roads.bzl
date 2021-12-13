@@ -32,7 +32,7 @@ def build_road(name, entry, data):
     ]
 
     webpack(
-        name = name,
+        name = name + "_build",
         args = [
             "--env name=" + build_name,
             "--env entry=./$(execpath :transpile_" + name + ")",
@@ -46,5 +46,13 @@ def build_road(name, entry, data):
             "//bazel/js/internals/webpack:webpack_shared_configs",
         ] + deps,
         output_dir = True,
+    )
+
+    swc(
+        name = name,
+        args = [
+            "-C minify=true",
+        ],
+        srcs = [":" + name + "_build"],
         visibility = ["//src/client/routes:__pkg__"],
     )
