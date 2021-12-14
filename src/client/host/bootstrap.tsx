@@ -16,9 +16,13 @@ const CDN_URL = config.CDN_HOST;
 const reactRouterRoutes = [];
 for (const route of Object.keys(config)) {
   if (route !== "CDN_HOST") {
+    const props = {
+      path: route,
+      key: config[route],
+    };
     const rrRoute = (
       <Route
-        {...`path=${route} key=${config[route]}`}
+        {...props}
         element={
           <React.Suspense fallback={<>...</>}>
             <FederatedRoute path={route} />
@@ -26,6 +30,7 @@ for (const route of Object.keys(config)) {
         }
       />
     );
+
     reactRouterRoutes.push(rrRoute);
   }
 }
@@ -45,9 +50,11 @@ function NoMatch() {
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
-      <Routes>{reactRouterRoutes}</Routes>
+      <Routes>
+        {reactRouterRoutes}
+        <Route path="*" element={<NoMatch />} />
+      </Routes>
     </BrowserRouter>
-    <Route path="*" element={<NoMatch />} />
   </React.StrictMode>,
   document.getElementById("root")
 );
