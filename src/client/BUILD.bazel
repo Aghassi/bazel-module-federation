@@ -14,7 +14,7 @@ pkg_web(
 )
 
 http_server(
-    name = "dev_cdn_server",
+    name = "dev",
     args = [
         "./src/client/client",
         "--port",
