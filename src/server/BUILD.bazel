@@ -20,9 +20,7 @@ nodejs_binary(
         "//src/server:my_server",
     ],
     entry_point = "server.js",
-    env = {
-        "CDN_HOST": "http://localhost:3000",
-    },
+    visibility = ["//:server_group"],
 )
 
 # This layer links the server container to the routes being

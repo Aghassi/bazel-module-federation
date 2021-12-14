@@ -15,11 +15,6 @@ pkg_web(
 
 http_server(
     name = "dev",
-    args = [
-        "./src/client/client",
-        "--port",
-        "3000",
-    ],
     data = [
         ":client",
     ],
