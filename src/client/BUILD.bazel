@@ -17,9 +17,9 @@ pkg_web(
 )
 
 http_server(
-    name = "dev_cdn_server"
+    name = "dev_cdn_server",
+    args = ["."],
     data = [
-        ":client"
-    ]
-    args = ["."]
+        ":client",
+    ],
 )

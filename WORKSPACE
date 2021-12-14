@@ -30,6 +30,47 @@ yarn_install(
     yarn_lock = "//:yarn.lock",
 )
 
+http_archive(
+    name = "aspect_rules_swc",
+    sha256 = "67d6020374627f60c6c1e5d5e1690fcdc4fa39952de8a727d3aabe265ca843be",
+    strip_prefix = "rules_swc-0.1.0",
+    url = "https://github.com/aspect-build/rules_swc/archive/v0.1.0.tar.gz",
+)
+
+# Fetches the rules_swc dependencies.
+# If you want to have a different version of some dependency,
+# you should fetch it *before* calling this.
+# Alternatively, you can skip calling this function, so long as you've
+# already fetched all the dependencies.
+load("@aspect_rules_swc//swc:dependencies.bzl", "rules_swc_dependencies")
+
+rules_swc_dependencies()
+
+# Fetches a pre-built Rust-node binding from
+# https://github.com/swc-project/swc/releases.
+# If you'd rather compile it from source, you can use rules_rust, fetch the project,
+# then register the toolchain yourself. (Note, this is not yet documented)
+load("@aspect_rules_swc//swc:repositories.bzl", "swc_register_toolchains")
+
+swc_register_toolchains(
+    name = "swc",
+    swc_version = "v1.2.118",
+)
+
+# Fetches a NodeJS interpreter, needed to run the swc CLI.
+# You can skip this if you already register a nodejs toolchain.
+load("@rules_nodejs//nodejs:repositories.bzl", "nodejs_register_toolchains")
+
+nodejs_register_toolchains(
+    name = "node16",
+    node_version = NODE_VERSION,
+)
+
+# Fetches the npm packages needed to run @swc/cli
+load("@swc_cli//:repositories.bzl", _swc_cli_deps = "npm_repositories")
+
+_swc_cli_deps()
+
 # Skylib
 
 http_archive(

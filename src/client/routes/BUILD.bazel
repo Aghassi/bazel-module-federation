@@ -2,8 +2,8 @@ load("//bazel/js:defaults.bzl", "build_road", "generate_route_manifest", "js_lib
 
 build_road(
     name = "default",
-    data = ["default.jsx"],
-    entry = "./$(execpath default.jsx)",
+    data = ["default.tsx"],
+    entry = "./$(execpath default.tsx)",
 )
 
 pkg_web(

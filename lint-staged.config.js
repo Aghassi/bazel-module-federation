@@ -4,4 +4,6 @@ module.exports = {
   "*.md": ["prettier --write"],
   "*.{yml,yaml}": ["prettier --write"],
   "*.{bazel,bzl}": ["bazel run //:buildifier"],
+  "*.sh": ["prettier --write"],
+  "*.gitignore": ["prettier --write"],
 };

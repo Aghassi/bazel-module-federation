@@ -1,4 +1,4 @@
-load("//bazel/js:defaults.bzl", "build_host", "pkg_web")
+load("//bazel/js:defaults.bzl", "build_host")
 
 build_host(
     data = [
@@ -9,14 +9,5 @@ build_host(
         "host.jsx",
         "//src/utils:__pkg__",
     ],
-    entry = "./$(execpath host.jsx)",
-)
-
-pkg_web(
-    name = "host",
-    srcs = [
-        ":host_build",
-    ],
-    additional_root_paths = ["%s/host_build" % package_name()],
-    visibility = ["//src/client:__pkg__"],
+    entry = "host",
 )
