@@ -2,23 +2,23 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import FederatedRoute from "./FederatedRoute";
-import { BrowserRouter, Route, Link } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 
 const path = window.location.pathname;
 // Find a better way to hydrate this as it isn't really "clean"
-const config = window.global.config;
-const CDN_URL = config.CDN_URL;
+const config = window.config;
+const CDN_URL = config.CDN_HOST;
 
 /**
  * Grab all routes and their paths and declare them as lazy imports
  * Map each route path to a given lazy import to be navigated to
  */
 const reactRouterRoutes = [];
-for (const route in Object.keys(config)) {
-  if (route !== "CDN_URL") {
+for (const route of Object.keys(config)) {
+  if (route !== "CDN_HOST") {
     const rrRoute = (
       <Route
-        {...`path=${route}`}
+        {...`path=${route} key=${config[route]}`}
         element={
           <React.Suspense fallback={<>...</>}>
             <FederatedRoute path={route} />
@@ -44,7 +44,9 @@ function NoMatch() {
 // root element is defined on the server side
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter>{...reactRouterRoutes}</BrowserRouter>
+    <BrowserRouter>
+      <Routes>{reactRouterRoutes}</Routes>
+    </BrowserRouter>
     <Route path="*" element={<NoMatch />} />
   </React.StrictMode>,
   document.getElementById("root")
