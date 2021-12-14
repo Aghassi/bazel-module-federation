@@ -14,10 +14,10 @@ Proof of concept for using Bazel to back a webpack module federation website
 You can stand up the servers locally by running the following:
 
 ```sh
-# Terminal 1
+# Terminal 1 ("CDN" hosting the client-side JS)
 yarn ibazel run //src/client:dev
 
-# Terminal 2
+# Terminal 2 ("server" which delivers the HTML template)
 yarn ibazel run //src/server:dev
 ```
 
