@@ -1,4 +1,5 @@
 load("//bazel/js:defaults.bzl", "pkg_web")
+load("@npm//http-server:index.bzl", "http_server")
 
 pkg_web(
     name = "client",
@@ -13,4 +14,12 @@ pkg_web(
     visibility = [
         "//:server_group",
     ],
+)
+
+http_server(
+    name = "dev_cdn_server"
+    data = [
+        ":client"
+    ]
+    args = ["."]
 )
