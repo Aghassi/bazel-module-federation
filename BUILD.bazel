@@ -1,4 +1,5 @@
 load("@com_github_bazelbuild_buildtools//buildifier:def.bzl", "buildifier")
+load("@com_github_ash2k_bazel_tools//multirun:def.bzl", "command", "multirun")
 
 exports_files([
     "package.json",
@@ -11,9 +12,47 @@ buildifier(
 package_group(
     name = "server_group",
     packages = [
+        "//",
         "//src/client",
         "//src/client/routes",
         "//src/server",
         "//src/utils",
     ],
+)
+
+# Defines dev-server watching for any route/host builds
+command(
+    name = "client_dev",
+    arguments = [
+        "./src/client/client",
+        "--port",
+        "3000",
+    ],
+    command = "//src/client:dev",
+    environment = {},
+    raw_environment = {},
+)
+
+# Defines build and run of the server component
+command(
+    name = "server_dev",
+    arguments = [
+        "--port",
+        "3000",
+    ],
+    command = "//src/server:dev",
+    environment = {
+        "CDN_HOST": "http://localhost:3000",
+    },
+    raw_environment = {},
+)
+
+# Instructs ibazel to run both client and server in the same script
+multirun(
+    name = "dev",
+    commands = [
+        ":client_dev",
+        ":server_dev",
+    ],
+    jobs = 0,
 )
