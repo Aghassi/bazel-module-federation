@@ -4,7 +4,7 @@ import getPageTemplate from "./getPageTemplate";
 import * as http from 'http';
 
 // From //src/client/routes:__pkg__, used to give server route context
-import config from "@carto/routes"
+import { routeManifest } from "@carto/routes"
 
 // From //src/utils:__pkg__
 import { getRemoteEntryScript } from "@carto/utils"
@@ -17,7 +17,7 @@ const requestListener: http.RequestListener = function (req, res) {
   const path = req.url || "/";
 
   // Filter out favicon or missing routes
-  const remoteScript = getRemoteEntryScript(path, config)
+  const remoteScript = getRemoteEntryScript(req.url || "/", routeManifest, process.env.CDN_HOST)
   
   if(remoteScript === null) {
     res.writeHead(404)
@@ -34,14 +34,14 @@ const requestListener: http.RequestListener = function (req, res) {
       getPageTemplate({
         head: [
           `<script src="${process.env.CDN_HOST}/app.main.js"></script>`,
-          getRemoteEntryScript(req.url || "/", config),
+          remoteScript,
         ],
       })
     );
   }
 };
 
-console.log("Server started on port 8080");
+console.log("Server started on port 8080!");
 
 const server = http.createServer(requestListener);
 server.listen(8080);
