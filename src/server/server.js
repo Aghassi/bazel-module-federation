@@ -19,19 +19,6 @@ const requestListener = function (req, res) {
   // Filter out favicon from spurious logic
   if (req.url.startsWith("/favicon.ico")) {
     res.writeHead(404);
-  } else if (req.url.startsWith("/__dev__/")) {
-    // Currently, in development mode, we bundle all client
-    //  assets with the server and set CDN_HOST to '/__dev__/'
-    //  as an indicator that the dependencies are co-located.
-    //  In this situtation, we deliver the assets in the same
-    //  file structure but from local
-
-    const filePath = req.url.replace("/__dev__/", "");
-
-    const fileToFetch = path.resolve("../..", "src/client/client", filePath);
-
-    res.writeHead(200);
-    res.end(fs.readFileSync(fileToFetch, "utf-8"));
   } else {
     res.writeHead(200);
     // In standard processing, this logical path will return an HTML page
@@ -52,8 +39,7 @@ const requestListener = function (req, res) {
   }
 };
 
-if (process.env.CDN_HOST.includes("__dev__")) {
-  console.log("Development server started on port 8080");
-}
+console.log("Server started on port 8080");
+
 const server = http.createServer(requestListener);
 server.listen(8080);

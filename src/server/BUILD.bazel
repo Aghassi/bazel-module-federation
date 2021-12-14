@@ -18,11 +18,10 @@ nodejs_binary(
     chdir = "%s" % package_name(),
     data = [
         ":server",
-        "//src/client",
     ],
     entry_point = "server.js",
     env = {
-        "CDN_HOST": "/__dev__",
+        "CDN_HOST": "http://localhost:3000",
     },
 )
 

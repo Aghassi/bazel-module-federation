@@ -11,15 +11,19 @@ pkg_web(
         "%s/routes/routes/" % package_name(),
         "%s/host/host" % package_name(),
     ],
-    visibility = [
-        "//:server_group",
-    ],
 )
 
 http_server(
     name = "dev_cdn_server",
-    args = ["."],
+    args = [
+        "./src/client/client",
+        "--port",
+        "3000",
+    ],
     data = [
         ":client",
+    ],
+    visibility = [
+        "//:server_group",
     ],
 )
