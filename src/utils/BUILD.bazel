@@ -6,5 +6,7 @@ build_module(
     srcs = [
         "index.ts",
     ],
-    data = [],
+    deps = [
+        "@npm//@types/node",
+    ],
 )

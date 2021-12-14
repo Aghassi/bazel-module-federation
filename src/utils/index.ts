@@ -15,7 +15,7 @@ export const getIdentifier = (reqPath?: string): string =>
  * @param routeManifest The route manifest json
  * @returns Script tag that can load a remoteEntry, null if route not found
  */
-export const getRemoteEntryScript = (remoteEntryPath, routeManifest: Record<string, string>): string | null => {
+export const getRemoteEntryScript = (remoteEntryPath: string, routeManifest: Record<string, string>, cdnUrl: string): string | null => {
   const identifier = getIdentifier(remoteEntryPath);
   const manifestIndex = remoteEntryPath.substring(1) || "/";
 
@@ -23,7 +23,7 @@ export const getRemoteEntryScript = (remoteEntryPath, routeManifest: Record<stri
     return null
   }
 
-  return `<script src="${process.env.CDN_HOST}${path.join(
+  return `<script src="${cdnUrl}${path.join(
     "/",
     identifier,
     routeManifest[manifestIndex]
