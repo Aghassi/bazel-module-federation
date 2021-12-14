@@ -1,13 +1,13 @@
 load("//bazel/docker:defaults.bzl", "container_image", "container_layer")
-load("//bazel/js:defaults.bzl", "js_library", "nodejs_binary", "pkg_web")
+load("//bazel/js:defaults.bzl", "build_server", "js_library", "nodejs_binary", "pkg_web")
 
-js_library(
-    name = "server",
+build_server(
+    name = "my_server",
     srcs = [
-        ":getPageTemplate.js",
-        ":server.js",
+        "getPageTemplate.ts",
+        "server.ts",
     ],
-    deps = [
+    data = [
         "//src/client/routes:__pkg__",
         "//src/utils:__pkg__",
     ],
@@ -17,7 +17,7 @@ nodejs_binary(
     name = "dev",
     chdir = "%s" % package_name(),
     data = [
-        ":server",
+        "//src/server:my_server",
     ],
     entry_point = "server.js",
     env = {

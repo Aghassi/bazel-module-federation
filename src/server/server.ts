@@ -1,26 +1,27 @@
 /** the server code that will render the HTML */
 
-const getPageTemplate = require("./getPageTemplate");
-
-const http = require("http");
+import getPageTemplate from "./getPageTemplate";
+import * as http from 'http';
 
 // From //src/client/routes:__pkg__, used to give server route context
-const config = require("@carto/routes");
+import config from "@carto/routes"
 
 // From //src/utils:__pkg__
-const { getRemoteEntryScript } = require("@carto/utils");
+import { getRemoteEntryScript } from "@carto/utils"
 
 /**
- * Handles routes and returns
- * @type {import('http').RequestListener}
+ * Handles routes and returns 
  */
-const requestListener = function (req, res) {
-  // Filter out favicon or missing routes
-  const remoteScript = getRemoteEntryScript(req.url || "/", config);
+const requestListener: http.RequestListener = function (req, res) {
+  
+  const path = req.url || "/";
 
-  if (remoteScript === null) {
-    res.writeHead(404);
-    res.end(`Route not found: ${req.url}`);
+  // Filter out favicon or missing routes
+  const remoteScript = getRemoteEntryScript(path, config)
+  
+  if(remoteScript === null) {
+    res.writeHead(404)
+    res.end(`Route not found: ${path}`)
   } else {
     res.writeHead(200);
     // In standard processing, this logical path will return an HTML page
@@ -31,7 +32,6 @@ const requestListener = function (req, res) {
     //  - A fetch of the remoteEntry script for the target page within head
     res.end(
       getPageTemplate({
-        path: req.url,
         head: [
           `<script src="${process.env.CDN_HOST}/app.main.js"></script>`,
           getRemoteEntryScript(req.url || "/", config),
