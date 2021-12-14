@@ -13,7 +13,11 @@ const getRemoteEntryScript = (path) => {
   const identifier = getIdentifier(path);
   const manifestIndex = path.substring(1) || "/";
 
-  return `<script src="${process.env.CDN_HOST}/${identifier}/${config[manifestIndex]}"></script>`;
+  return `<script src="${process.env.CDN_HOST}/${identifier}/${
+    config[manifestIndex]
+  }">
+    window.global.config=${JSON.stringify(config)}
+  </script>`;
 };
 
 module.exports = ({ head = [""], path = "/" }) => {
