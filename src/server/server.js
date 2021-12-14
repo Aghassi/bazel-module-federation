@@ -3,22 +3,24 @@
 const getPageTemplate = require("./getPageTemplate");
 
 const http = require("http");
-const path = require("path");
-const fs = require("fs");
 
+// From //src/client/routes:__pkg__, used to give server route context
 const config = require("@carto/routes");
 
+// From //src/utils:__pkg__
 const { getRemoteEntryScript } = require("@carto/utils");
 
 /**
- *
- * @param {import('http').ClientRequest} req request
- * @param {import('http').ServerResponse} res response
+ * Handles routes and returns
+ * @type {import('http').RequestListener}
  */
 const requestListener = function (req, res) {
-  // Filter out favicon from spurious logic
-  if (req.url.startsWith("/favicon.ico")) {
+  // Filter out favicon or missing routes
+  const remoteScript = getRemoteEntryScript(req.url || "/", config);
+
+  if (remoteScript === null) {
     res.writeHead(404);
+    res.end(`Route not found: ${req.url}`);
   } else {
     res.writeHead(200);
     // In standard processing, this logical path will return an HTML page
