@@ -2,7 +2,7 @@ import React from "react";
 import { getIdentifier } from "@carto/utils";
 import DynamicComponent from "./DynamicComponent";
 
-export default function Route({ path }) {
+export default function FederatedRoute({ path }) {
   const identifier = getIdentifier(path);
   return (
     <DynamicComponent

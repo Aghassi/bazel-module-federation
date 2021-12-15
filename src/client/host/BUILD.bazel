@@ -3,7 +3,7 @@ load("//bazel/js:defaults.bzl", "build_host")
 build_host(
     srcs = [
         "DynamicComponent.tsx",
-        "Route.tsx",
+        "FederatedRoute.tsx",
         "bootstrap.tsx",
         "capabilities/preload.ts",
         "host.tsx",
