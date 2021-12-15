@@ -6,6 +6,7 @@ build_module(
     srcs = [
         "index.ts",
     ],
+    visibility = ["//visibility:public"],
     deps = [
         "@npm//@types/node",
     ],

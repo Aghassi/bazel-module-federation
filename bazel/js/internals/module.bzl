@@ -5,7 +5,8 @@ load("@npm//@bazel/typescript:index.bzl", "ts_project")
 
 def build_module(package_name, srcs, deps, **kwargs):
     """
-    Macro that allows easy composition of routes from a multi route spa
+    Macro that allows easy construction of a TS module that can be shared
+        across the project
 
     Args:
         package_name: name of the package
@@ -27,14 +28,11 @@ def build_module(package_name, srcs, deps, **kwargs):
         },
     )
 
-    visibility = kwargs.pop("visibility", ["//visibility:public"])
-
     js_library(
         name = "__pkg__",
         package_name = package_name,
         srcs = [
             ":transpiled_pkg",
         ],
-        visibility = visibility,
         **kwargs
     )
