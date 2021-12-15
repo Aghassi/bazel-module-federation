@@ -12,7 +12,9 @@ pkg_web(
         ":default",
         "//src/client/routes/secondary",
     ],
-    additional_root_paths = ["%s/secondary" % package_name()],
+    additional_root_paths = [
+        "%s/secondary" % package_name(),
+    ],
     visibility = ["//src/client:__pkg__"],
 )
 
