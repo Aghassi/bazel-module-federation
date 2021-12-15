@@ -5,7 +5,7 @@ load("@aspect_rules_swc//swc:swc.bzl", "swc")
 
 def build_server(name, srcs, data, **kwargs):
     """
-    Macro that allows easy composition of routes from a multi route spa
+    Macro that construct the http server for the project
 
     Args:
         package_name: name of the package
@@ -34,11 +34,8 @@ def build_server(name, srcs, data, **kwargs):
         for s in srcs
     ]
 
-    visibility = kwargs.pop("visibility", ["//visibility:public"])
-
     js_library(
         name = name,
         srcs = deps + data,
-        visibility = visibility,
         **kwargs
     )
