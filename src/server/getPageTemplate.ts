@@ -12,7 +12,10 @@ export default ({
 <html lang="en">
   <head>
     <script>
-      window.config=${JSON.stringify(config)}
+      window.config=${JSON.stringify({
+        ...config,
+        CDN_HOST: process.env.CDN_HOST,
+      })}
     </script>
     <meta charset="UTF-8">
     ${head.join("\n")}

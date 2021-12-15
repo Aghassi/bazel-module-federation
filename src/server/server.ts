@@ -1,27 +1,30 @@
 /** the server code that will render the HTML */
 
 import getPageTemplate from "./getPageTemplate";
-import * as http from 'http';
+import * as http from "http";
 
 // From //src/client/routes:__pkg__, used to give server route context
-import { routeManifest } from "@carto/routes"
+import { routeManifest } from "@carto/routes";
 
 // From //src/utils:__pkg__
-import { getRemoteEntryScript } from "@carto/utils"
+import { getRemoteEntryScript } from "@carto/utils";
 
 /**
- * Handles routes and returns 
+ * Handles routes and returns
  */
 const requestListener: http.RequestListener = function (req, res) {
-  
   const path = req.url || "/";
 
   // Filter out favicon or missing routes
-  const remoteScript = getRemoteEntryScript(req.url || "/", routeManifest, process.env.CDN_HOST)
-  
-  if(remoteScript === null) {
-    res.writeHead(404)
-    res.end(`Route not found: ${path}`)
+  const remoteScript = getRemoteEntryScript(
+    req.url || "/",
+    routeManifest,
+    process.env.CDN_HOST
+  );
+
+  if (remoteScript === null) {
+    res.writeHead(404);
+    res.end(`Route not found: ${path}`);
   } else {
     res.writeHead(200);
     // In standard processing, this logical path will return an HTML page
@@ -36,6 +39,7 @@ const requestListener: http.RequestListener = function (req, res) {
           `<script src="${process.env.CDN_HOST}/app.main.js"></script>`,
           remoteScript,
         ],
+        config: routeManifest,
       })
     );
   }
