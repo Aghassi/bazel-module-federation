@@ -1,10 +1,10 @@
 import React from "react";
-import getIdentifier from "./capabilities/getIdentifier";
+import { getIdentifier } from "@carto/utils";
 import DynamicComponent from "./DynamicComponent";
 
 export default function FederatedRoute({ path, url }) {
   const identifier = getIdentifier(path);
-  console.log(path);
+  console.log(`Federated Route:`, path, url);
   return (
     <DynamicComponent
       system={{

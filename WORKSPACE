@@ -6,6 +6,7 @@ workspace(
 NODE_VERSION = "16.13.0"
 
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
+load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
 
 http_archive(
     name = "build_bazel_rules_nodejs",
@@ -168,3 +169,13 @@ http_archive(
         "https://github.com/bazelbuild/buildtools/archive/refs/tags/4.2.2.tar.gz",
     ],
 )
+
+git_repository(
+    name = "com_github_ash2k_bazel_tools",
+    commit = "4daedde3ec61a03db841c8a9ca68288972e25a82",
+    remote = "https://github.com/ash2k/bazel-tools.git",
+)
+
+load("@com_github_ash2k_bazel_tools//multirun:deps.bzl", "multirun_dependencies")
+
+multirun_dependencies()

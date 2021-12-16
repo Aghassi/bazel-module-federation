@@ -35,13 +35,13 @@ const useDynamicScript = (args) => {
 
     element.onload = () => {
       console.log(`Dynamic Script Loaded: ${args.url}`);
-      // This line does not update the state and rerender
+      // When this loads, it seems like this state is not updated...
       setReady(true);
     };
 
     element.onerror = () => {
       console.error(`Dynamic Script Error: ${args.url}`);
-      // These lines do update the state...
+      // ... but these will update fine in an error case (try blocking remoteEntry in network)
       setReady(false);
       setFailed(true);
     };
@@ -66,7 +66,7 @@ export default function DynamicComponent(props) {
   });
 
   if (!props.system) {
-    return <h2>Not system specified</h2>;
+    return <h2>No system specified</h2>;
   }
 
   if (!ready) {

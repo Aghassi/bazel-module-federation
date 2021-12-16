@@ -17,9 +17,7 @@ const getFilesInDirectory = (source) =>
     .filter((dirent) => dirent.isFile())
     .map((dirent) => dirent.name);
 
-const platform = process.platform === "darwin" ? process.platform : "k8";
-const architecture = process.arch === "arm64" ? "_arm64" : "";
-const outputRoutesBase = `bazel-out/${platform}${architecture}-fastbuild/bin/src/client/routes/routes`;
+const outputRoutesBase = process.argv[2];
 
 const routeDirs = getDirectories(outputRoutesBase);
 

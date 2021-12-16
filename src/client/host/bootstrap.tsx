@@ -3,7 +3,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import FederatedRoute from "./FederatedRoute";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
-
+import { getRemoteEntryUrl } from "@carto/utils";
 const path = window.location.pathname;
 // Find a better way to hydrate this as it isn't really "clean"
 const config = window.config;
@@ -20,17 +20,14 @@ for (const route of Object.keys(config)) {
       path: route,
       key: config[route],
     };
+
     const rrRoute = (
       <Route
         {...props}
         element={
           <FederatedRoute
             path={route}
-            url={[
-              ...CDN_URL.split("/"),
-              route === "/" ? "default" : route,
-              config[route],
-            ].join("/")}
+            url={getRemoteEntryUrl(route, config, CDN_URL)}
           />
         }
       />
