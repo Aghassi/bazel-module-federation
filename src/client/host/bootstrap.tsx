@@ -24,9 +24,14 @@ for (const route of Object.keys(config)) {
       <Route
         {...props}
         element={
-          <React.Suspense fallback={<>...</>}>
-            <FederatedRoute path={route} />
-          </React.Suspense>
+          <FederatedRoute
+            path={route}
+            url={[
+              ...CDN_URL.split("/"),
+              route === "/" ? "default" : route,
+              config[route],
+            ].join("/")}
+          />
         }
       />
     );
@@ -39,6 +44,7 @@ function NoMatch() {
   return (
     <div>
       <h2>Nothing to see here!</h2>
+      <br></br>
       <p>
         <Link to="/">Go to the home page</Link>
       </p>
