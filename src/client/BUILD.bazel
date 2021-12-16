@@ -5,10 +5,10 @@ pkg_web(
     name = "client",
     srcs = [
         "//src/client/host",
-        "//src/client/routes",
+        "//src/client/routes:all_routes",
     ],
     additional_root_paths = [
-        "%s/routes/routes/" % package_name(),
+        "%s/routes/all_routes/" % package_name(),
         "%s/host/host" % package_name(),
     ],
 )

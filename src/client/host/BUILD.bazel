@@ -9,7 +9,7 @@ build_host(
         "host.tsx",
     ],
     data = [
-        "//src/utils:__pkg__",
+        "//src/utils",
     ],
     entry = "host",
 )

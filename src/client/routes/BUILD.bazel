@@ -7,7 +7,7 @@ build_road(
 )
 
 pkg_web(
-    name = "routes",
+    name = "all_routes",
     srcs = [
         ":default",
         "//src/client/routes/secondary",
@@ -18,7 +18,7 @@ pkg_web(
 
 generate_route_manifest(
     name = "route_manifest",
-    data = ["routes"],
+    routes = "all_routes",
 )
 
 build_module(

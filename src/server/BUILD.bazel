@@ -8,8 +8,8 @@ build_server(
         "server.ts",
     ],
     data = [
-        "//src/client/routes:__pkg__",
-        "//src/utils:__pkg__",
+        "//src/client/routes",
+        "//src/utils",
     ],
 )
 
@@ -29,7 +29,7 @@ container_layer(
     name = "route_manifest_layer",
     directory = "/home/node/node_modules/@carto/routes",
     files = [
-        "//src/client/routes:__pkg__",
+        "//src/client/routes",
     ],
 )
 
@@ -39,7 +39,7 @@ container_layer(
     name = "utils_layer",
     directory = "/home/node/node_modules/@carto/utils",
     files = [
-        "//src/utils:__pkg__",
+        "//src/utils",
     ],
 )
 

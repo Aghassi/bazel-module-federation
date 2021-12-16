@@ -29,7 +29,7 @@ def build_module(package_name, srcs, deps, **kwargs):
     )
 
     js_library(
-        name = "__pkg__",
+        name = native.package_name().split("/")[-1],
         package_name = package_name,
         srcs = [
             ":transpiled_pkg",
