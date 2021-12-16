@@ -8,6 +8,7 @@ import SubComponent from "./dep";
 export default () => (
   <div>
     Secondary Road. <SubComponent />
+    <br></br>
     <Link to="/">Go to homepage</Link>
   </div>
 );

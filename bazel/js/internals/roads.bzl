@@ -25,6 +25,10 @@ def build_road(name, entry, data):
             name = "transpile_" + s.replace("//", "").replace("/", "_").split(".")[0],
             args = [
                 "-C jsc.parser.jsx=true",
+                "-C jsc.parser.typescript=true",
+                "-C jsc.transform.react.runtime=automatic",
+                "-C jsc.transform.react.development=false",
+                "-C module.type=commonjs",
             ],
             srcs = [s],
         )

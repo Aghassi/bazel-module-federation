@@ -22,7 +22,6 @@
     "@bazel/ibazel": "0.15.10",
     "@bazel/typescript": "4.4.6",
     "@types/node": "16.11.11",
-    "esbuild-loader": "2.16.0",
     "husky": "7.0.4",
     "lint-staged": "12.1.2",
     "prettier": "2.5.1",

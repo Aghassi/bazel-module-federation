@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 /**
  * Defines a main route
  */
-
 export default () => (
   <div>
     Main Road
