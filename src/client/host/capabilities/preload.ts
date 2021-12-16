@@ -1,4 +1,4 @@
-import getIdentifier from "./getIdentifier";
+import { getIdentifier } from "@carto/utils";
 
 export default ({ path }) => {
   const { routeManifest } = window;

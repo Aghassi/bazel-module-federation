@@ -35,11 +35,13 @@ const useDynamicScript = (args) => {
 
     element.onload = () => {
       console.log(`Dynamic Script Loaded: ${args.url}`);
+      // When this loads, it seems like this state is not updated...
       setReady(true);
     };
 
     element.onerror = () => {
       console.error(`Dynamic Script Error: ${args.url}`);
+      // ... but these will update fine in an error case (try blocking remoteEntry in network)
       setReady(false);
       setFailed(true);
     };
@@ -59,22 +61,20 @@ const useDynamicScript = (args) => {
 };
 
 export default function DynamicComponent(props) {
-  if (!window[props.system.scope]) {
-    const { ready, failed } = useDynamicScript({
-      url: props.system && props.system.url,
-    });
+  const { ready, failed } = useDynamicScript({
+    url: props.system && props.system.url,
+  });
 
-    if (!props.system) {
-      return <h2>Not system specified</h2>;
-    }
+  if (!props.system) {
+    return <h2>No system specified</h2>;
+  }
 
-    if (!ready) {
-      return <h2>Loading dynamic script: {props.system.url}</h2>;
-    }
+  if (!ready) {
+    return <h2>Loading dynamic script: {props.system.url}</h2>;
+  }
 
-    if (failed) {
-      return <h2>Failed to load dynamic script: {props.system.url}</h2>;
-    }
+  if (failed) {
+    return <h2>Failed to load dynamic script: {props.system.url}</h2>;
   }
 
   const Component = React.lazy(

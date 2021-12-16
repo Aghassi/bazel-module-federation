@@ -1,4 +1,4 @@
-load("//bazel/js:defaults.bzl", "build_road", "generate_route_manifest", "pkg_web")
+load("//bazel/js:defaults.bzl", "build_module", "build_road", "generate_route_manifest", "pkg_web")
 
 build_road(
     name = "default",
@@ -7,7 +7,7 @@ build_road(
 )
 
 pkg_web(
-    name = "routes",
+    name = "all_routes",
     srcs = [
         ":default",
         "//src/client/routes/secondary",
@@ -18,5 +18,17 @@ pkg_web(
 
 generate_route_manifest(
     name = "route_manifest",
-    data = ["routes"],
+    routes = "all_routes",
+)
+
+build_module(
+    package_name = "@carto/routes",
+    srcs = [
+        "index.ts",
+        ":route_manifest",
+    ],
+    visibility = ["//:server_group"],
+    deps = [
+        "@npm//@types/node",
+    ],
 )

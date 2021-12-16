@@ -2,17 +2,10 @@
   "minify": false,
   "jsc": {
     "parser": {
-      "syntax": "ecmascript",
-      "jsx": true,
-      "dynamicImport": false,
-      "privateMethod": false,
-      "functionBind": false,
-      "exportDefaultFrom": false,
-      "exportNamespaceFrom": false,
+      "syntax": "typescript",
+      "tsx": true,
       "decorators": false,
-      "decoratorsBeforeExport": false,
-      "topLevelAwait": false,
-      "importMeta": false
+      "dynamicImport": false
     },
     "transform": null,
     "target": "es5",

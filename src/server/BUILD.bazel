@@ -1,12 +1,45 @@
 load("//bazel/docker:defaults.bzl", "container_image", "container_layer")
+load("//bazel/js:defaults.bzl", "build_server", "js_library", "nodejs_binary", "pkg_web")
+
+build_server(
+    name = "server",
+    srcs = [
+        "getPageTemplate.ts",
+        "server.ts",
+    ],
+    data = [
+        "//src/client/routes",
+        "//src/utils",
+    ],
+)
+
+nodejs_binary(
+    name = "dev",
+    chdir = "%s" % package_name(),
+    data = [
+        "//src/server",
+    ],
+    entry_point = "server.js",
+    visibility = ["//:server_group"],
+)
 
 # This layer links the server container to the routes being
 # Changed so it can have the route manifest
 container_layer(
     name = "route_manifest_layer",
-    directory = "/home/node",
+    directory = "/home/node/node_modules/@carto/routes",
     files = [
-        "//src/client/routes:route_manifest",
+        "//src/client/routes",
+    ],
+)
+
+# This layer links the server container to the routes being
+# Changed so it can have the route manifest
+container_layer(
+    name = "utils_layer",
+    directory = "/home/node/node_modules/@carto/utils",
+    files = [
+        "//src/utils",
     ],
 )
 
@@ -15,18 +48,18 @@ container_layer(
     name = "server_source_layer",
     directory = "/home/node",
     files = [
-        ":getPageTemplate.js",
-        ":server.js",
+        ":server",
     ],
 )
 
 # This builds the final image for use and sets the directory to /home/node
 container_image(
-    name = "server",
+    name = "server_image",
     base = "@node//image",
     layers = [
         ":server_source_layer",
         ":route_manifest_layer",
+        ":utils_layer",
     ],
     workdir = "/home/node",
 )

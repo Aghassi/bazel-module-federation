@@ -1,13 +1,15 @@
 load("//bazel/js:defaults.bzl", "build_host")
 
 build_host(
-    data = [
+    srcs = [
         "DynamicComponent.tsx",
-        "Route.tsx",
+        "FederatedRoute.tsx",
         "bootstrap.tsx",
-        "capabilities/getIdentifier.ts",
         "capabilities/preload.ts",
         "host.tsx",
+    ],
+    data = [
+        "//src/utils",
     ],
     entry = "host",
 )
