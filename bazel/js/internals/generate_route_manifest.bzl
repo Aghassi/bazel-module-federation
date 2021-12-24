@@ -23,7 +23,7 @@ def generate_route_manifest(name, routes):
         tool = ":bin",
         data = [routes],
         args = [
-            "$(execpath %s)" % routes,   
+            "$(execpath %s)" % routes,
         ],
         stdout = "route.manifest.json",
         visibility = ["//visibility:public"],
