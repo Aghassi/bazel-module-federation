@@ -104,7 +104,16 @@ The main hurdle here is in reconciling configurations for multiple builds, given
 
 In our first iteration, all routes will be dynamically loaded on the client side. However, it would be advantageous to consider the ability to preemptively load and/or render these dynamic routes for cases where performance is a hard requirement. The ability to statically render HTML is very necessary for marketing pages, where performance can heavily impact SEO and, by proxy, business goals.
 
-### Middleware concept
+### Server Middlewares
+
+#### Motivation
+
+This framework should provide a great default experience without configuration outside declaring routes/client/server. There are varied needs for projects around
+
+#### Use Cases
+
+- Data Prefetching
+- Auth: varied level of need across different routes
 
 #### API
 
@@ -137,6 +146,47 @@ type Middleware =  async ({
 }>
 ```
 
-this return object can be used by our built-in service to know when to stop. Note: future changes can be made easily on what each middleware should return. Middleware should likely be minimally provided with the request listener (something that can allow for reactivity with the request and response), as well as a standard way to fetch assets from the CDN (or otherwise a way to tell the server to perform default behavior).
+This return object can be used by our built-in service to know when to stop. Note: future changes can be made easily on what each middleware should return. Middleware should likely be minimally provided with the request listener (something that can allow for reactivity with the request and response), as well as a standard way to fetch assets from the CDN (or otherwise a way to tell the server to perform default behavior).
 
 It should be noted that this not only provides added flexibility and functionality out of the server, but it also allows the server runtime to be more baked into the rule itself, and thus constructing a macro to manage the development server can make inferences about the relationship between the server and CDN assets more easily.
+
+#### Benchmarking
+
+```python=
+build_middleware(
+    name = "ssr",
+    performance_threshold = "0.500s", # <-- TBD
+    entry = "index.ts"
+)
+
+# Based on route manifest, run this with mocked res/req against any route that requests this middleware
+```
+
+#### Considerations
+
+- A route should be able to declare a need for using a specific middleware
+  - ex: route can request login capability, server runs middleware on auth
+
+### Server/Service
+
+```python
+load("//bazel/js:server.bzl","server");
+
+server(
+    name = "service",
+    middlewares = [
+        "",
+    ],
+    middleware_threshold = "",
+)
+```
+
+Outputs:
+
+- `:service_dev`: A `nodejs_binary` instance that
+- `:service_layer`: A docker image layer containing only the server code
+- `:service_middleware_layer`: A docker image layer containing the service middleware packages, such that this can be built independently
+
+TBD:
+
+- Docker image layer needs to know which middlewares are used, since this was previously brought in as `templated_args` on the `:service_layer`
