@@ -1,0 +1,13 @@
+load("//bazel/js:defaults.bzl", "build_module")
+load("@npm//@bazel/typescript:index.bzl", "ts_project")
+
+build_module(
+    package_name = "@carto/middleware",
+    srcs = [
+        "index.ts",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        "@npm//@types/node",
+    ],
+)

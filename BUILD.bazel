@@ -36,10 +36,7 @@ command(
 # Defines build and run of the server component
 command(
     name = "server_dev",
-    arguments = [
-        "--port",
-        "3000",
-    ],
+    arguments = [],
     command = "//src/server:dev",
     environment = {
         "CDN_HOST": "http://localhost:3000",

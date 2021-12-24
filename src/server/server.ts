@@ -9,11 +9,29 @@ import { routeManifest } from "@carto/routes";
 // From //src/utils:__pkg__
 import { getRemoteEntryScript } from "@carto/utils";
 
+console.log(`Process args: ${process.argv}`);
+
+const middlewares = process.argv.slice(
+  process.argv.indexOf("--middleware") + 1
+);
+
+console.log(middlewares);
+
 /**
  * Handles routes and returns
  */
 const requestListener: http.RequestListener = function (req, res) {
   const path = req.url || "/";
+
+  for (let middleware of middlewares) {
+    const middlewareModule = require(`${middleware}`);
+
+    const { isCompleted } = middlewareModule.default({ req, res });
+
+    if (isCompleted) {
+      return;
+    }
+  }
 
   // Filter out favicon or missing routes
   const remoteScript = getRemoteEntryScript(

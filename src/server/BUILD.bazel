@@ -9,6 +9,7 @@ build_server(
     ],
     data = [
         "//src/client/routes",
+        "//src/middleware",
         "//src/utils",
     ],
 )
@@ -20,6 +21,10 @@ nodejs_binary(
         "//src/server",
     ],
     entry_point = "server.js",
+    templated_args = [
+        "--middleware",
+        "@carto/middleware",
+    ],
     visibility = ["//:server_group"],
 )
 
