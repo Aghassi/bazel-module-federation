@@ -103,3 +103,40 @@ The main hurdle here is in reconciling configurations for multiple builds, given
 ### Eager Routes (and SSR)
 
 In our first iteration, all routes will be dynamically loaded on the client side. However, it would be advantageous to consider the ability to preemptively load and/or render these dynamic routes for cases where performance is a hard requirement. The ability to statically render HTML is very necessary for marketing pages, where performance can heavily impact SEO and, by proxy, business goals.
+
+### Middleware concept
+
+#### API
+
+```
+build_server(
+    name = "server",
+    srcs = [
+        "getPageTemplate.ts",
+        "server.ts",
+    ],
+    middleware = [
+        "//src/middlewares:404",
+        "@npm//my-middleware" # This tbd
+    ]
+    data = [
+        "//src/client/routes",
+        "//src/utils",
+    ],
+)
+```
+
+Each middleware is a `js_library` that exposes a function of the form :
+
+```js
+type Middleware =  async ({
+  requestListener: https.RequestListener
+  fetchCDNAsset: async (reqUrl: string) => Promsie<{ isComplete: true }>
+}) => Promise<{
+  isComplete: boolean
+}>
+```
+
+this return object can be used by our built-in service to know when to stop. Note: future changes can be made easily on what each middleware should return. Middleware should likely be minimally provided with the request listener (something that can allow for reactivity with the request and response), as well as a standard way to fetch assets from the CDN (or otherwise a way to tell the server to perform default behavior).
+
+It should be noted that this not only provides added flexibility and functionality out of the server, but it also allows the server runtime to be more baked into the rule itself, and thus constructing a macro to manage the development server can make inferences about the relationship between the server and CDN assets more easily.

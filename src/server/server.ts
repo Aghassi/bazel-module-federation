@@ -12,7 +12,7 @@ import { getRemoteEntryScript } from "@carto/utils";
 /**
  * Handles routes and returns
  */
-const requestListener: http.RequestListener = function (req, res) {
+const requestListener: http.RequestListener = function (req, res): void {
   const path = req.url || "/";
 
   // Filter out favicon or missing routes
