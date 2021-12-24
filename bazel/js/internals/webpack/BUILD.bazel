@@ -17,9 +17,9 @@ filegroup(
 )
 
 filegroup(
-    name = "road_config",
+    name = "route_config",
     srcs = [
-        "webpack.road.config.js",
+        "webpack.route.config.js",
     ],
     visibility = ["//visibility:public"],
 )

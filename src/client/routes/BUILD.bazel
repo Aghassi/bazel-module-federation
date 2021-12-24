@@ -1,6 +1,6 @@
-load("//bazel/js:defaults.bzl", "build_module", "build_road", "generate_route_manifest", "pkg_web")
+load("//bazel/js:defaults.bzl", "build_module", "build_route", "generate_route_manifest", "pkg_web")
 
-build_road(
+build_route(
     name = "default",
     data = ["default.tsx"],
     entry = "./$(execpath default.tsx)",

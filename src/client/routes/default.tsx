@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
  */
 export default () => (
   <div>
-    Main Road
+    Main Route
     <br></br>
     <Link to="/secondary">Go to second page</Link>
   </div>
