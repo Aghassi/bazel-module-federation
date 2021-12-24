@@ -4,7 +4,7 @@ const generateWebpackCommonConfig = require("./webpack.common.config");
 const shared = require("./webpack.module-federation.shared");
 
 /**
- * Webpack configuration used to generate a unique road
+ * Webpack configuration used to generate a unique route
  *
  * @param {Record<string, boolean|string}
  * @returns {import('webpack').Configuration} a Webpack configuration

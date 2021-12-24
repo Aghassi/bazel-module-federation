@@ -1,6 +1,6 @@
-load("//bazel/js:defaults.bzl", "build_road")
+load("//bazel/js:defaults.bzl", "build_route")
 
-build_road(
+build_route(
     name = "secondary",
     data = [
         "dep.tsx",

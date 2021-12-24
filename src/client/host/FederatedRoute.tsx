@@ -8,7 +8,7 @@ export default function FederatedRoute({ path, url }) {
   return (
     <DynamicComponent
       system={{
-        scope: `${identifier}_road`,
+        scope: `${identifier}_route`,
         module: "./route",
         url,
       }}
