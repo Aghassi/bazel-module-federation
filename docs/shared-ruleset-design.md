@@ -31,6 +31,7 @@ the downstream engineers are responsible for.
 | Routes             | Exposes a module federation container that presents a loadable route to consumers.                                                                                                                                 | Default exports a React component. Transpiled with SWC and bundled with Webpack (hard requirement, no other bundlers currently implement this Module Federation spec.) |
 | Development Server | Stands up the `Server` and provides a "CDN" That hosts assets for `Client` and all `Routes`, keeping CDN and Server isolated from compilation. The `Server` thus must need to know where CDN assets are sourced on | Client-side code is hosted through a simple `http-server`, and localhost port is passed to server via `CDN_HOST` environment variable                                  |
 
+
 ## High-level usage design
 
 A project could look like this:
