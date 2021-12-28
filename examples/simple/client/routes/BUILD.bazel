@@ -4,16 +4,17 @@ build_route(
     name = "default",
     data = ["default.tsx"],
     entry = "./$(execpath default.tsx)",
+    visibility = ["//examples/simple:server_group"],
 )
 
 pkg_web(
     name = "all_routes",
     srcs = [
         ":default",
-        "//src/client/routes/secondary",
+        "//examples/simple/client/routes/secondary",
     ],
     additional_root_paths = ["%s/secondary" % package_name()],
-    visibility = ["//src/client:__pkg__"],
+    visibility = ["//examples/simple/client:__pkg__"],
 )
 
 generate_route_manifest(
@@ -27,7 +28,7 @@ build_module(
         "index.ts",
         ":route_manifest",
     ],
-    visibility = ["//:server_group"],
+    visibility = ["//examples/simple:server_group"],
     deps = [
         "@npm//@types/node",
     ],

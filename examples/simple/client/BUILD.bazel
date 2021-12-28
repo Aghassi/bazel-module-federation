@@ -4,8 +4,8 @@ load("@npm//http-server:index.bzl", "http_server")
 pkg_web(
     name = "client",
     srcs = [
-        "//src/client/host",
-        "//src/client/routes:all_routes",
+        "//examples/simple/client/host",
+        "//examples/simple/client/routes:all_routes",
     ],
     additional_root_paths = [
         "%s/routes/all_routes/" % package_name(),
@@ -19,6 +19,6 @@ http_server(
         ":client",
     ],
     visibility = [
-        "//:server_group",
+        "//examples/simple:server_group",
     ],
 )

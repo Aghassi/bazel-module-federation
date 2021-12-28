@@ -3,10 +3,10 @@
 import getPageTemplate from "./getPageTemplate";
 import * as http from "http";
 
-// From //src/client/routes:__pkg__, used to give server route context
+// From //examples/simple/client/routes:routes, used to give server route context
 import { routeManifest } from "@carto/routes";
 
-// From //src/utils:__pkg__
+// From //examples/simple/utils:utils
 import { getRemoteEntryScript } from "@carto/utils";
 
 /**

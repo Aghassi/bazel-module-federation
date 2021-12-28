@@ -6,7 +6,7 @@ def generate_route_manifest(name, routes):
 
     Args:
         - name: name of the invocation
-        - routes: the sources from the //src/routes rule to be used in the script
+        - routes: the sources from the routes rule to be used in the script
     Returns the generated manifest
     """
 

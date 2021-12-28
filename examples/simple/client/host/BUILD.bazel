@@ -9,7 +9,8 @@ build_host(
         "host.tsx",
     ],
     data = [
-        "//src/utils",
+        "//examples/simple/utils",
     ],
     entry = "host",
+    visibility = ["//examples/simple:server_group"],
 )

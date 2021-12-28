@@ -3,7 +3,7 @@ load("@aspect_rules_swc//swc:swc.bzl", "swc")
 
 # Defines this as an importable module area for shared macros and configs
 
-def build_route(name, entry, data):
+def build_route(name, entry, data, **kwargs):
     """
     Macro that allows easy composition of routes from a multi route spa
 
@@ -35,6 +35,7 @@ def build_route(name, entry, data):
         for s in data
     ]
 
+    visibility = kwargs.pop("visibility", [])
     webpack(
         name = name,
         args = [
@@ -50,5 +51,5 @@ def build_route(name, entry, data):
             "//bazel/js/internals/webpack:webpack_shared_configs",
         ] + deps,
         output_dir = True,
-        visibility = ["//src/client/routes:__pkg__"],
+        visibility = visibility,
     )

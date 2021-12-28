@@ -4,7 +4,7 @@ load("@build_bazel_rules_nodejs//:index.bzl", "pkg_web")
 
 # Defines this as an importable module area for shared macros and configs
 
-def build_host(entry, data, srcs):
+def build_host(entry, data, srcs, **kwargs):
     """
     Macro that allows easy building of the main host of a SPA
 
@@ -46,11 +46,13 @@ def build_host(entry, data, srcs):
         output_dir = True,
     )
 
+    visibility = kwargs.pop("visibility", [])
+
     pkg_web(
         name = "host",
         srcs = [
             ":host_build",
         ],
         additional_root_paths = ["%s/host_build" % native.package_name()],
-        visibility = ["//src/client:__pkg__"],
+        visibility = visibility,
     )
