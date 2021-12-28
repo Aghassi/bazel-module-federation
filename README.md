@@ -21,7 +21,7 @@ If you want to try the federated site, you can do the following
 
 1. Make sure [Docker](https://docker.io) is running on your machine.
 1. `yarn bazel build //...`
-1. `yarn bazel run //src/server:server_image`
+1. `yarn bazel run //examples/simple/server:server_image`
 1. `docker-compose up -d`
 
 You can then navigate to `http://localhost:8080/` to see the default route and `http://localhost:8080/secondary` route.
