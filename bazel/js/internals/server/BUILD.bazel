@@ -1,0 +1,8 @@
+filegroup(
+    name = "server_code",
+    srcs = [
+        "getPageTemplate.ts",
+        "server.ts",
+    ],
+    visibility = ["//visibility:public"],
+)
