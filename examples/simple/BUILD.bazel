@@ -1,4 +1,5 @@
 load("@com_github_ash2k_bazel_tools//multirun:def.bzl", "command", "multirun")
+load("//bazel/js/internals:server.bzl", "server")
 
 package_group(
     name = "server_group",
@@ -11,9 +12,14 @@ package_group(
     ],
 )
 
+server(
+    name = "server",
+    route_manifest_module = "//examples/simple/client/routes",
+)
+
 # Defines dev-server watching for any route/host builds
 command(
-    name = "client_dev",
+    name = "client_dev_cmd",
     arguments = [
         "./%s/client/client" % package_name(),
         "--port",
@@ -26,12 +32,12 @@ command(
 
 # Defines build and run of the server component
 command(
-    name = "server_dev",
+    name = "server_dev_cmd",
     arguments = [
         "--port",
         "3000",
     ],
-    command = "//examples/simple/server:dev",
+    command = ":server_dev",
     environment = {
         "CDN_HOST": "http://localhost:3000",
     },
@@ -42,8 +48,8 @@ command(
 multirun(
     name = "dev",
     commands = [
-        ":client_dev",
-        ":server_dev",
+        ":client_dev_cmd",
+        ":server_dev_cmd",
     ],
     jobs = 0,
 )
