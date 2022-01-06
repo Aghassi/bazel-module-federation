@@ -179,6 +179,7 @@ git_repository(
 load("@com_github_ash2k_bazel_tools//multirun:deps.bzl", "multirun_dependencies")
 
 multirun_dependencies()
+<<<<<<< HEAD
 
 http_archive(
     name = "rules_spa",
@@ -195,3 +196,5 @@ http_archive(
 load("@rules_spa//spa:repositories.bzl", "rules_spa_dependencies")
 
 rules_spa_dependencies()
+=======
+>>>>>>> fix: remove rules_spa
