@@ -179,3 +179,19 @@ git_repository(
 load("@com_github_ash2k_bazel_tools//multirun:deps.bzl", "multirun_dependencies")
 
 multirun_dependencies()
+
+http_archive(
+    name = "rules_spa",
+    sha256 = "d8f93861b7767274100c8716253cc2fa5f96a0fa3a26e333bdce2683d0411427",
+    strip_prefix = "rules_spa-0.0.4",
+    url = "https://github.com/aghassi/rules_spa/archive/v0.0.4.tar.gz",
+)
+
+# Fetches the rules_spa dependencies.
+# If you want to have a different version of some dependency,
+# you should fetch it *before* calling this.
+# Alternatively, you can skip calling this function, so long as you've
+# already fetched all the dependencies.
+load("@rules_spa//spa:repositories.bzl", "rules_spa_dependencies")
+
+rules_spa_dependencies()
