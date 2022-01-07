@@ -16,6 +16,8 @@ filegroup(
     visibility = ["//visibility:public"],
 )
 
+exports_files(["webpack.module-federation.shared.js"])
+
 filegroup(
     name = "route_config",
     srcs = [

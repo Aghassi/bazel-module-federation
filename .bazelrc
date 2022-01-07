@@ -3,3 +3,5 @@
 # Settings that apply only to CI are in .github/workflows/ci.bazelrc
 
 build --enable_runfiles
+# Uncomment this and update the path when testing against rules_spa
+# build --override_repository=rules_spa=/path/to/rules_spa
