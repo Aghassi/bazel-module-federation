@@ -1,4 +1,5 @@
-load("//bazel/js:defaults.bzl", "build_module", "build_route", "generate_route_manifest", "pkg_web")
+load("//bazel/js:defaults.bzl", "build_module", "build_route", "pkg_web")
+load("@rules_spa//spa:defs.bzl", "generate_route_manifest")
 
 build_route(
     name = "default",
