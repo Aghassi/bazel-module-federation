@@ -1,5 +1,6 @@
 load("//bazel/docker:defaults.bzl", "container_image", "container_layer")
-load("//bazel/js:defaults.bzl", "build_server", "js_library", "nodejs_binary", "pkg_web")
+load("//bazel/js:defaults.bzl", "nodejs_binary")
+load("@rules_spa//spa:defs.bzl", "build_server")
 
 build_server(
     name = "server",
