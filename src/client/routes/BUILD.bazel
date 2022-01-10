@@ -1,10 +1,17 @@
-load("//bazel/js:defaults.bzl", "build_module", "build_route", "pkg_web")
-load("@rules_spa//spa:defs.bzl", "generate_route_manifest")
+load("@npm//webpack-cli:index.bzl", "webpack_cli")
+load("//bazel/js:defaults.bzl", "build_module", "pkg_web")
+load("@rules_spa//spa:defs.bzl", "build_route", "generate_route_manifest")
 
 build_route(
     name = "default",
-    data = ["default.tsx"],
+    srcs = ["default.tsx"],
+    data = [
+        "//:package.json",
+        "@npm//:node_modules",
+    ],
     entry = "./$(execpath default.tsx)",
+    shared = "//bazel/js/internals/webpack:webpack.module-federation.shared.js",
+    webpack = webpack_cli,
 )
 
 pkg_web(
