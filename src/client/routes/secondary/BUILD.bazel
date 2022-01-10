@@ -1,10 +1,17 @@
-load("//bazel/js:defaults.bzl", "build_route")
+load("@npm//webpack-cli:index.bzl", "webpack_cli")
+load("@rules_spa//spa:defs.bzl", "build_route")
 
 build_route(
     name = "secondary",
-    data = [
+    srcs = [
         "dep.tsx",
         "secondary.tsx",
     ],
+    data = [
+        "//:package.json",
+        "@npm//:node_modules",
+    ],
     entry = "./$(execpath secondary.tsx)",
+    shared = "//bazel/js/internals/webpack:webpack.module-federation.shared.js",
+    webpack = webpack_cli,
 )
