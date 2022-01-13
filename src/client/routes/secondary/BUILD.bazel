@@ -9,6 +9,7 @@ build_route(
     ],
     data = [
         "//:package.json",
+        "//src/utils",
         "@npm//:node_modules",
     ],
     entry = "./$(execpath secondary.tsx)",

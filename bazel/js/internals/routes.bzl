@@ -25,7 +25,7 @@ def build_route(name, entry, data):
             name = "transpile_" + s.replace("//", "").replace("/", "_").split(".")[0],
             args = [
                 "-C jsc.parser.jsx=true",
-                "-C jsc.parser.typescript=true",
+                "-C jsc.parser.syntax=typescript",
                 "-C jsc.transform.react.runtime=automatic",
                 "-C jsc.transform.react.development=false",
                 "-C module.type=commonjs",

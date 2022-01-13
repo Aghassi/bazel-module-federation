@@ -4,6 +4,8 @@ import ReactDOM from "react-dom";
 import FederatedRoute from "./FederatedRoute";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import { getRemoteEntryUrl } from "@carto/utils";
+import { store } from "@carto/utils/redux";
+import { Provider } from "react-redux";
 const path = window.location.pathname;
 // Find a better way to hydrate this as it isn't really "clean"
 const config = window.config;
@@ -52,12 +54,14 @@ function NoMatch() {
 // root element is defined on the server side
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <Routes>
-        {reactRouterRoutes}
-        <Route path="*" element={<NoMatch />} />
-      </Routes>
-    </BrowserRouter>
+    <Provider store={store}>
+      <BrowserRouter>
+        <Routes>
+          {reactRouterRoutes}
+          <Route path="*" element={<NoMatch />} />
+        </Routes>
+      </BrowserRouter>
+    </Provider>
   </React.StrictMode>,
   document.getElementById("root")
 );
