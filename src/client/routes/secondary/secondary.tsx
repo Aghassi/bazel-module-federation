@@ -2,12 +2,13 @@ import React from "react";
 import { Link } from "react-router-dom";
 import SubComponent from "./dep";
 import { useSelector } from "react-redux";
+import { getCounterSelector } from "@carto/utils/redux";
 /**
  * Defines a secondary route
  */
 
 export default () => {
-  const count = useSelector((state) => state.counter.value);
+  const count = useSelector(getCounterSelector);
 
   return (
     <div>

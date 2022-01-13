@@ -1,14 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { RootState } from "@carto/utils/redux";
 import { decrement, increment } from "@carto/utils/redux/counterSlice";
+import { getCounterSelector } from "@carto/utils/redux";
 
 /**
  * Defines a main route
  */
 export default () => {
-  const count = useSelector((state) => state.counter.value);
+  const count = useSelector(getCounterSelector);
   const dispatch = useDispatch();
 
   return (
