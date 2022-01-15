@@ -9,7 +9,12 @@ build_route(
     ],
     data = [
         "//:package.json",
-        "@npm//:node_modules",
+        "//src/utils",
+        # "@npm//:node_modules",
+        "@npm//react-redux",
+        "@npm//react-router-dom",
+        "@npm//react",
+        "@npm//@reduxjs/toolkit",
     ],
     entry = "./$(execpath secondary.tsx)",
     shared = "//bazel/js/internals/webpack:webpack.module-federation.shared.js",

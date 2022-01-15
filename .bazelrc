@@ -2,6 +2,7 @@
 # Take care to document any settings that you expect users to apply.
 # Settings that apply only to CI are in .github/workflows/ci.bazelrc
 
-build --enable_runfiles
+build --enable_runfiles --incompatible_strict_action_env
+run --enable_runfiles --incompatible_strict_action_env
 # Uncomment this and update the path when testing against rules_spa
 # build --override_repository=rules_spa=/path/to/rules_spa

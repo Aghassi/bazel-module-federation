@@ -5,9 +5,13 @@ build_module(
     package_name = "@carto/utils",
     srcs = [
         "index.ts",
+        "redux/counterSlice.ts",
+        "redux/index.ts",
+        "redux/store.ts",
     ],
     visibility = ["//visibility:public"],
     deps = [
+        "@npm//@reduxjs/toolkit",
         "@npm//@types/node",
     ],
 )
