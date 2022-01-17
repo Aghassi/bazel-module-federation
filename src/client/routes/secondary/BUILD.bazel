@@ -10,6 +10,7 @@ build_route(
     data = [
         "//:package.json",
         "@npm//:node_modules",
+        "@npm//@carto/utils",
     ],
     entry = "./$(execpath secondary.tsx)",
     federation_shared_config = "//bazel/js/internals/webpack:webpack.module-federation.shared.js",

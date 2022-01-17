@@ -27,6 +27,9 @@ node_repositories(
 yarn_install(
     # Name this npm so that Bazel Label references look like @npm//package
     name = "npm",
+    links = {
+        "@carto/utils": "//src/utils",
+    },
     package_json = "//:package.json",
     yarn_lock = "//:yarn.lock",
 )
