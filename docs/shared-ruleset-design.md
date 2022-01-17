@@ -22,6 +22,16 @@ this easy, or investigate Gazelle). **By default**, we will pull in a proven set
 The above outputs can be released independently, and the versioning/release is something
 the downstream engineers are responsible for.
 
+## Building-blocks
+
+| Canonical Name     | Responsibility                                                                                                                                                                                                     | Default Behavior                                                                                                                                                       |
+| ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Client             | Provides ability to dynamically reference a module federation container and render the exposed route, client-side routing (more client-side feature possible in future)                                            | React with `react-router` to navigate between federated routes, transpiled with SWC and bundled by Webpack.                                                            |
+| Server             | Returns HTML templates for routes that bootstrap the application (features like SSR possible in future). Configurable via CLI args/flags or environment variables.                                                 | Returns HTML page with client bundle and preloaded route federation `remoteEntry`. Internal middleware supported to augment functionality                              |
+| Routes             | Exposes a module federation container that presents a loadable route to consumers.                                                                                                                                 | Default exports a React component. Transpiled with SWC and bundled with Webpack (hard requirement, no other bundlers currently implement this Module Federation spec.) |
+| Development Server | Stands up the `Server` and provides two servers. One serves the built routes, the other serves the sever and the base HTML. This keeps route compilation isolated from server development and vice verse. The main caveat is the server must know where to look for client route assets. | Client-side code is hosted through a simple `http-server`, and localhost port is passed to server via `CDN_HOST` environment variable                                  |
+
+
 ## High-level usage design
 
 A project could look like this:
