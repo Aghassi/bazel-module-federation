@@ -29,6 +29,7 @@ yarn_install(
     name = "npm",
     links = {
         "@carto/utils": "//src/utils",
+        "@carto/routes": "//src/client/routes",
     },
     package_json = "//:package.json",
     yarn_lock = "//:yarn.lock",
