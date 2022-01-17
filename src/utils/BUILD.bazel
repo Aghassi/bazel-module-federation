@@ -1,5 +1,4 @@
 load("//bazel/js:defaults.bzl", "build_module")
-load("@npm//@bazel/typescript:index.bzl", "ts_project")
 
 build_module(
     package_name = "@carto/utils",
@@ -10,4 +9,10 @@ build_module(
     deps = [
         "@npm//@types/node",
     ],
+)
+
+filegroup(
+    name = "index",
+    srcs = ["index.ts"],
+    visibility = ["//visibility:public"],
 )

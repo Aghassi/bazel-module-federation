@@ -10,7 +10,7 @@ build_server(
     ],
     data = [
         "//src/client/routes",
-        "//src/utils",
+        "@npm//@carto/utils",
     ],
 )
 

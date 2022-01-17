@@ -5,14 +5,13 @@ load("@npm//@bazel/typescript:index.bzl", "ts_project")
 
 def build_module(package_name, srcs, deps, **kwargs):
     """
-    Macro that allows easy construction of a TS module that can be shared
-        across the project
+    Macro that allows easy construction of a TS module that can be shared across the project
 
     Args:
         package_name: name of the package
         srcs: source files from the package
-        data: any dependencies needed to build
-        kwargs: any other inputs to js_library
+        deps: any dependencies needed to build
+        **kwargs: any other inputs to js_library
     """
 
     # list of all transpilation targets from SWC to be passed to webpack
