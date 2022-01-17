@@ -10,9 +10,3 @@ build_module(
         "@npm//@types/node",
     ],
 )
-
-filegroup(
-    name = "index",
-    srcs = ["index.ts"],
-    visibility = ["//visibility:public"],
-)
