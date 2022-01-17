@@ -29,3 +29,16 @@ You can then navigate to `http://localhost:8080/` to see the default route and `
 When done, run `docker-compose down`
 
 It is recommended you use [StackBuild plugin](https://marketplace.visualstudio.com/items?itemName=StackBuild.bazel-stack-vscode) for VSCode to get good Bazel integration.
+
+## Create a new Route (currently MacOS only)
+
+To create a new route, you can use the helper shell script:
+
+```bash
+./create_route my-route-name
+```
+
+This will:
+
+- Create a new directory under `src/client/routes` with an associated React component and `BUILD.bazel` file
+- Associate the route to the `routes` config in `src/client/routes/BUILD.bazel` file
