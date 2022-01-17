@@ -1,27 +1,2 @@
 # Defines this as an importable module area for shared macros and configs
-filegroup(
-    name = "host_config",
-    srcs = [
-        "webpack.host.config.js",
-    ],
-    visibility = ["//visibility:public"],
-)
-
-filegroup(
-    name = "webpack_shared_configs",
-    srcs = [
-        "webpack.common.config.js",
-        "webpack.module-federation.shared.js",
-    ],
-    visibility = ["//visibility:public"],
-)
-
 exports_files(["webpack.module-federation.shared.js"])
-
-filegroup(
-    name = "route_config",
-    srcs = [
-        "webpack.route.config.js",
-    ],
-    visibility = ["//visibility:public"],
-)
