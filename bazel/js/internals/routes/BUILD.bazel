@@ -1,7 +1,0 @@
-filegroup(
-    name = "generate_route_manifest_script",
-    srcs = [
-        "generate-route-manifest.js",
-    ],
-    visibility = ["//visibility:public"],
-)
