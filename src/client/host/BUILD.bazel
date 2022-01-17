@@ -15,6 +15,6 @@ build_host(
         "@npm//:node_modules",
     ],
     entry = "host",
-    shared = "//bazel/js/internals/webpack:webpack.module-federation.shared.js",
+    federation_shared_config = "//bazel/js/internals/webpack:webpack.module-federation.shared.js",
     webpack = webpack_cli,
 )

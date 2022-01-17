@@ -12,6 +12,6 @@ build_route(
         "@npm//:node_modules",
     ],
     entry = "./$(execpath secondary.tsx)",
-    shared = "//bazel/js/internals/webpack:webpack.module-federation.shared.js",
+    federation_shared_config = "//bazel/js/internals/webpack:webpack.module-federation.shared.js",
     webpack = webpack_cli,
 )
