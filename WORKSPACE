@@ -186,9 +186,9 @@ multirun_dependencies()
 
 http_archive(
     name = "rules_spa",
-    sha256 = "6f02952ef6d7fa6b491b89b2a8c12e728bc51f418e9eaa9f94a7f4e89fb9f80f",
-    strip_prefix = "rules_spa-0.0.7",
-    url = "https://github.com/aghassi/rules_spa/archive/v0.0.7.tar.gz",
+    sha256 = "00dbec576a08288d7d791a61f59316f1766d9cae996d34af65056c4b56f11076",
+    strip_prefix = "rules_spa-0.0.9",
+    url = "https://github.com/aghassi/rules_spa/archive/v0.0.9.tar.gz",
 )
 
 # Fetches the rules_spa dependencies.
