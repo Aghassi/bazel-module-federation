@@ -1,0 +1,11 @@
+load("//bazel/js:defaults.bzl", "esbuild")
+
+esbuild(
+    name = "404",
+    entry_point = "404.tsx",
+    minify = False,
+    splitting = False,
+    target = "esnext",
+    visibility = ["//src/client/host:__pkg__"],
+    deps = ["@npm//:node_modules"],
+)

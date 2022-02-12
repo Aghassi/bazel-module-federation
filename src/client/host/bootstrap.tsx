@@ -3,6 +3,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import FederatedRoute from "./FederatedRoute";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import { NoMatch } from "./404/404";
 import { getRemoteEntryUrl } from "@carto/utils";
 const path = window.location.pathname;
 // Find a better way to hydrate this as it isn't really "clean"
@@ -35,18 +36,6 @@ for (const route of Object.keys(config)) {
 
     reactRouterRoutes.push(rrRoute);
   }
-}
-
-function NoMatch() {
-  return (
-    <div>
-      <h2>Nothing to see here!</h2>
-      <br></br>
-      <p>
-        <Link to="/">Go to the home page</Link>
-      </p>
-    </div>
-  );
 }
 
 // root element is defined on the server side

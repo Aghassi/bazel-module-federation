@@ -11,6 +11,7 @@ build_host(
     ],
     data = [
         "//:package.json",
+        "//src/client/host/404",
         "@npm//:node_modules",
         "@npm//@carto/utils",
     ],
