@@ -18,5 +18,9 @@ export function NoMatch() {
  * by webpack and bundled
  */
 export function DeadCode() {
-  return <div></div>;
+  return (
+    <div>
+      <h2>What is dead may never die</h2>
+    </div>
+  );
 }
