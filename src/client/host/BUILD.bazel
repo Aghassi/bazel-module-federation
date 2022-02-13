@@ -11,9 +11,9 @@ build_host(
     ],
     data = [
         "//:package.json",
-        "//src/client/host/404",
         "@npm//:node_modules",
         "@npm//@carto/utils",
+        "@npm//@internal/404",
     ],
     entry = "host",
     federation_shared_config = "//bazel/js/internals/webpack:webpack.module-federation.shared.js",

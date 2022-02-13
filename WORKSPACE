@@ -30,6 +30,7 @@ yarn_install(
     links = {
         "@carto/utils": "//src/utils",
         "@carto/routes": "//src/client/routes",
+        "@internal/404": "//src/client/host/404:@internal/404",
     },
     package_json = "//:package.json",
     yarn_lock = "//:yarn.lock",

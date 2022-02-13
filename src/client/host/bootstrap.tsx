@@ -2,8 +2,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import FederatedRoute from "./FederatedRoute";
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
-import { NoMatch } from "./404/404";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { NoMatch } from "@internal/404";
 import { getRemoteEntryUrl } from "@carto/utils";
 const path = window.location.pathname;
 // Find a better way to hydrate this as it isn't really "clean"
