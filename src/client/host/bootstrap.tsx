@@ -2,7 +2,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import FederatedRoute from "./FederatedRoute";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Outlet, Link } from "react-router-dom";
 import { NoMatch } from "@internal/404";
 import { getRemoteEntryUrl } from "@carto/utils";
 const path = window.location.pathname;
@@ -38,13 +38,33 @@ for (const route of Object.keys(config)) {
   }
 }
 
+const Layout = () => {
+  return (
+    <div>
+      <nav>
+        <ul>
+          <li>
+            <Link to="/nothing-here">404</Link>
+          </li>
+        </ul>
+      </nav>
+      {/* An <Outlet> renders whatever child route is currently active,
+          so you can think about this <Outlet> as a placeholder for
+          the child routes we defined above. */}
+      <Outlet />
+    </div>
+  );
+};
+
 // root element is defined on the server side
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
       <Routes>
-        {reactRouterRoutes}
-        <Route path="*" element={<NoMatch />} />
+        <Route path="/" element={<Layout />}>
+          {reactRouterRoutes}
+          <Route path="*" element={<NoMatch />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   </React.StrictMode>,

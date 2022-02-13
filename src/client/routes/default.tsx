@@ -9,5 +9,6 @@ export default () => (
     Main Route
     <br></br>
     <Link to="/secondary">Go to second page</Link>
+    <Link to="/404">Go to 404 page</Link>
   </div>
 );
