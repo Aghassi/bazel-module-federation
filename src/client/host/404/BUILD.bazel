@@ -3,6 +3,7 @@ load("//bazel/js:defaults.bzl", "esbuild")
 esbuild(
     name = "404",
     entry_point = "404.tsx",
+    external = ["react-router-dom"],
     format = "esm",
     minify = False,
     splitting = False,
