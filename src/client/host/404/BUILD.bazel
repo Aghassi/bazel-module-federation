@@ -1,0 +1,25 @@
+load("//bazel/js:defaults.bzl", "esbuild", "js_library")
+
+esbuild(
+    name = "404",
+    entry_point = "404.tsx",
+    external = [
+        "react",
+        "react-router-dom",
+    ],
+    format = "esm",
+    minify = False,
+    output = "index.mjs",
+    splitting = False,
+    target = "esnext",
+    deps = ["@npm//:node_modules"],
+)
+
+js_library(
+    name = "@internal/404",
+    srcs = [
+        "package.json",
+        ":404",
+    ],
+    visibility = ["//visibility:public"],
+)

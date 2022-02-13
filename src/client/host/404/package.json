@@ -1,0 +1,6 @@
+{
+  "name": "@internal/404",
+  "type": "module",
+  "main": "index.mjs",
+  "sideEffects": false
+}
