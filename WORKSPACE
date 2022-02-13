@@ -42,9 +42,9 @@ esbuild_repositories(npm_repository = "npm")
 
 http_archive(
     name = "aspect_rules_swc",
-    sha256 = "67d6020374627f60c6c1e5d5e1690fcdc4fa39952de8a727d3aabe265ca843be",
-    strip_prefix = "rules_swc-0.1.0",
-    url = "https://github.com/aspect-build/rules_swc/archive/v0.1.0.tar.gz",
+    sha256 = "b58c8f3681215af30842bc3eeec30c9d2047cdf63302bba7d2e86c55a5c77edf",
+    strip_prefix = "rules_swc-0.3.1",
+    url = "https://github.com/aspect-build/rules_swc/archive/refs/tags/v0.3.1.tar.gz",
 )
 
 # Fetches the rules_swc dependencies.
